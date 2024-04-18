@@ -1,14 +1,17 @@
 package com.openclassrooms.mdd.controllers;
 
-import com.openclassrooms.mdd.models.UserEntity;
 import com.openclassrooms.mdd.usecase.UserAuthUseCase;
-import com.openclassrooms.mdd.usecase.dto.request.LoginRequestDto;
-import org.springframework.web.bind.annotation.*;
+import com.openclassrooms.mdd.usecase.dto.UserDto;
+import com.openclassrooms.mdd.usecase.dto.request.AuthRequestDto;
 
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/mdd/auth")
 public class AuthController {
 
     private final UserAuthUseCase userAuthUseCase;
@@ -17,13 +20,13 @@ public class AuthController {
         this.userAuthUseCase = userAuthUseCase;
     }
 
-    @PostMapping(value = "/login")
-    public Optional<UserEntity> login(@RequestBody LoginRequestDto loginRequestDto) {
-        return userAuthUseCase.getUser(loginRequestDto);
+    @GetMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthRequestDto authRequestDto) {
+        return userAuthUseCase.getUser(authRequestDto);
     }
 
-    @GetMapping(value = "/test")
-    public String testController() {
-        return "test test";
+    @PostMapping("/register")
+    public ResponseEntity<?> postMethodName(@Valid @RequestBody UserDto userDto) {
+        return userAuthUseCase.registerUser(userDto);
     }
 }

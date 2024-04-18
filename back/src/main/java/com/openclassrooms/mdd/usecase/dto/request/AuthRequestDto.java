@@ -1,11 +1,10 @@
 package com.openclassrooms.mdd.usecase.dto.request;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-public class LoginRequestDto {
+public class AuthRequestDto {
     private String email;
+    private String username;
     private String password;
 }
