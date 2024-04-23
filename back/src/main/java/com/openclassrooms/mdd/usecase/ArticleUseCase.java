@@ -21,5 +21,9 @@ public class ArticleUseCase {
     public ResponseEntity<?> updateArticleById(ArticleRequestDto articleRequestDto, int articleId) {
         return articleService.updateArticleById(articleRequestDto, articleId);
     }
-    
+
+    public ResponseEntity<?> postNewArticle(ArticleRequestDto articleRequestDto) {
+        return articleService.postNewArticle(articleRequestDto);
+    }
+
 }

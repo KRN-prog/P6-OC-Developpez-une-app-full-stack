@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.openclassrooms.mdd.models.ArticleEntity;
 import com.openclassrooms.mdd.repository.ArticleRepository;
 import com.openclassrooms.mdd.usecase.dto.mapper.ArticleMapper;
+import com.openclassrooms.mdd.usecase.dto.mapper.ArticleRequestMapper;
 import com.openclassrooms.mdd.usecase.dto.request.ArticleRequestDto;
 
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
-    
+
     private final ArticleRepository articleRepository;
 
     public ResponseEntity<?> getArticleById(int articleId) {
@@ -46,6 +47,14 @@ public class ArticleService {
             response.put("error", "Article error: Cannot update the article");
             return ResponseEntity.badRequest().body(response);
         }
+
+    }
+
+    public ResponseEntity<?> postNewArticle(ArticleRequestDto articleRequestDto) {
+
+        ArticleEntity article = ArticleRequestMapper.maptoArticle(articleRequestDto);
+
+        return ResponseEntity.ok(articleRepository.save(article));
 
     }
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 @RestController
 @RequestMapping("/mdd")
 public class ArticleController {
@@ -34,8 +33,8 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public Integer postNewArticle(@Valid @RequestBody Integer newArticleRequest) {
-        return 1;
+    public ResponseEntity<?> postNewArticle(@Valid @RequestBody ArticleRequestDto articleRequestDto) {
+        return this.articleUseCase.postNewArticle(articleRequestDto);
     }
 
 }
