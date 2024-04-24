@@ -11,6 +11,8 @@ import java.util.Optional;
 @Repository
 public interface AuthRepository extends JpaRepository<UserEntity, Long> {
 
+    Optional<UserEntity> findByMail(String mail);
+
     Optional<UserEntity> findByUsernameOrMail(String mail, String username);
 
     void save(UserDto userDto);
