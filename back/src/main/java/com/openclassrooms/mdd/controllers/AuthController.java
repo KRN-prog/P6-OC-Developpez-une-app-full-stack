@@ -27,8 +27,6 @@ public class AuthController {
 
     private final UserAuthUseCase userAuthUseCase;
 
-    public JWTService jwtService;
-
     public AuthController(UserAuthUseCase userAuthUseCase) {
         this.userAuthUseCase = userAuthUseCase;
     }
