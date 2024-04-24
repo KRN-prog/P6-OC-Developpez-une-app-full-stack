@@ -46,14 +46,12 @@ public class AuthService {
 
         if (user != null && user.getPassword().equals(authRequestDto.getPassword())) {
             UserDto userDto = UserMapper.maptoUserDto(user);
-            // return ResponseEntity.ok(userDto);
 
             String token = jwtService.genrerateToken(userDto, null, authentication);
 
             TokenResponse tokenResponse = new TokenResponse();
             tokenResponse.setToken(token);
 
-            // Convertir l'objet en JSON
             ObjectMapper objectMapper = new ObjectMapper();
             return ResponseEntity.ok(objectMapper.writeValueAsString(tokenResponse));
         } else {
