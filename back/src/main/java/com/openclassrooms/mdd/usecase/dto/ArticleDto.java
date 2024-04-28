@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleDto {
-    
+
     private int id;
 
     @JsonProperty("titre")
@@ -26,4 +26,7 @@ public class ArticleDto {
 
     @JsonProperty("content")
     private String content;
+
+    @JsonProperty("theme")
+    private String theme;
 }

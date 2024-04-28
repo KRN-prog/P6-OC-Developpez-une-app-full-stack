@@ -4,14 +4,15 @@ import com.openclassrooms.mdd.models.ArticleEntity;
 import com.openclassrooms.mdd.usecase.dto.ArticleDto;
 
 public class ArticleMapper {
-    
+
     public static ArticleDto maptoArticleDto(ArticleEntity articleEntity) {
         return new ArticleDto(
                 articleEntity.getId(),
                 articleEntity.getTitre(),
                 articleEntity.getDate(),
                 articleEntity.getAuteur(),
-                articleEntity.getContent());
+                articleEntity.getContent(),
+                articleEntity.getTheme());
     }
 
     public static ArticleEntity maptoArticle(ArticleDto articleDto) {
@@ -20,7 +21,8 @@ public class ArticleMapper {
                 articleDto.getTitre(),
                 articleDto.getDate(),
                 articleDto.getAuteur(),
-                articleDto.getContent());
+                articleDto.getContent(),
+                articleDto.getTheme());
     }
 
 }

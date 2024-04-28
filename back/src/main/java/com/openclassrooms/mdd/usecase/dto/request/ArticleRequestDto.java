@@ -13,5 +13,6 @@ public class ArticleRequestDto {
     private String date;
     private String auteur;
     private String content;
+    private String theme;
 
 }
