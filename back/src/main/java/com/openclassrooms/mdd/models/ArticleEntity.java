@@ -20,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "articles")
 public class ArticleEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -36,5 +36,8 @@ public class ArticleEntity {
 
     @Column(name = "content")
     private String content;
-    
+
+    @Column(name = "theme")
+    private String theme;
+
 }

@@ -2,13 +2,11 @@ package com.openclassrooms.mdd.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.openclassrooms.mdd.service.AuthService;
-import com.openclassrooms.mdd.service.JWTService;
 import com.openclassrooms.mdd.usecase.UserAuthUseCase;
 import com.openclassrooms.mdd.usecase.dto.UserDto;
 import com.openclassrooms.mdd.usecase.dto.request.AuthRequestDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

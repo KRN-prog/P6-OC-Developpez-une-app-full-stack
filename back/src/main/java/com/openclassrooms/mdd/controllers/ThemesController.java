@@ -20,12 +20,12 @@ public class ThemesController {
         this.themesUseCase = themesUseCase;
     }
 
-    @GetMapping("/article/{id}")
+    @GetMapping("/theme/{id}")
     public ResponseEntity<?> getThemeById(@Valid @RequestBody Integer id) {
         return this.themesUseCase.getThemesById(id);
     }
 
-    @PostMapping("/article")
+    @PostMapping("/theme")
     public ResponseEntity<?> postNewTheme(@Valid @RequestBody ThemeRequestDto themeRequestDto) {
         return this.themesUseCase.postNewTheme(themeRequestDto);
     }

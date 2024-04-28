@@ -30,7 +30,10 @@ public class SpringSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/", "/mdd/auth/register", "/mdd/auth/login").permitAll()
+                        .requestMatchers("/", "/mdd/auth/register", "/mdd/auth/login", "/mdd/auth/me",
+                                "/mdd/article/{id}",
+                                "/mdd/article", "/mdd/post/message", "/mdd/theme/{id}", "/mdd/theme")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))

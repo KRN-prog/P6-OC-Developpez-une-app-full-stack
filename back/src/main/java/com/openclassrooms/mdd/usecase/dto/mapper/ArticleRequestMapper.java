@@ -11,7 +11,8 @@ public class ArticleRequestMapper {
                 articleRequestDto.getTitre(),
                 articleRequestDto.getDate(),
                 articleRequestDto.getAuteur(),
-                articleRequestDto.getContent());
+                articleRequestDto.getContent(),
+                articleRequestDto.getTheme());
     }
 
 }
