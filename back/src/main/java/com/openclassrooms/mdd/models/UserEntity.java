@@ -30,6 +30,6 @@ public class UserEntity {
     private String password;
 
     @Column(name = "themes")
-    private String[] themes;
+    private String themes;
 
 }

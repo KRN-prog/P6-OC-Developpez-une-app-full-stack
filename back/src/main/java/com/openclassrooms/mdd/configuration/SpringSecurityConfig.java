@@ -32,7 +32,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/", "/mdd/auth/register", "/mdd/auth/login", "/mdd/auth/me",
                                 "/mdd/article/{id}",
-                                "/mdd/article", "/mdd/post/message", "/mdd/theme/{id}", "/mdd/theme")
+                                "/mdd/article", "/mdd/post/message", "/mdd/theme/{id}", "/mdd/theme", "/mdd/user/{id}")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

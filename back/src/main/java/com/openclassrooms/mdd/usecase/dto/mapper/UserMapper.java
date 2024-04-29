@@ -19,6 +19,6 @@ public class UserMapper {
                 userDto.getUsername(),
                 userDto.getMail(),
                 userDto.getPassword(),
-                userDto.getThemes());
+                "[]");
     }
 }

@@ -25,6 +25,6 @@ public class UserDto {
     private String password;
 
     @JsonProperty("themes")
-    private String[] themes;
+    private String themes;
 
 }
