@@ -70,7 +70,9 @@ public class AuthService {
         if (user == null) {
             UserEntity userEntity = UserMapper.maptoUser(userDto);
             authRepository.save(userEntity);
-            return ResponseEntity.ok("User register successfully");
+            Map<String, String> response = new HashMap<>();
+            response.put("response", "User register successfully");
+            return ResponseEntity.ok(response);
         } else {
             Map<String, String> response = new HashMap<>();
             response.put("error", "Register error: Invalid credentials");
