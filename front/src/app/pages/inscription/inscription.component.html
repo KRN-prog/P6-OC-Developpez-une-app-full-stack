@@ -1,1 +1,26 @@
-<p>inscription works!</p>
+<app-header></app-header>
+<main>
+    <section>
+        <article class="article article--form">
+            <h2 class="article__h2">Inscription</h2>
+            <form (ngSubmit)="registerUser()" class="article__form">
+                <div class="article__form__container">
+                    <label for="username" class="labelForm">Nom d’utilisateur</label>
+                    <input type="text" name="username" id="username" class="inputForm" [(ngModel)]="userData.username" required/>
+                </div>
+                <div class="article__form__container">
+                    <label for="email" class="labelForm">Adresse e-mail</label>
+                    <input type="email" name="email" id="email" class="inputForm" [(ngModel)]="userData.email" required/>
+
+                </div>
+                <div class="article__form__container">
+                    <label for="password" class="labelForm">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="inputForm" [(ngModel)]="userData.password" required/>
+                </div>
+                <div class="article__form__container--button">
+                    <app-button [ngClass]="{'button--signUp': isSignUpPage}" [button]="signUp"></app-button>
+                </div>
+            </form>
+        </article>
+    </section>
+</main>

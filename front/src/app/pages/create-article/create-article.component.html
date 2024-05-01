@@ -1,1 +1,28 @@
-<p>create-article works!</p>
+<app-header></app-header>
+<main>
+    <section>
+        <article class="article">
+            <h2 class="article__h2">Créer un nouvel article</h2>
+            <form action="" class="article__form">
+                <div class="article__form__container">
+                    <!--<input type="text" id="emailOrUsername" placeholder="Selectionner un theme" class="inputForm" required/>-->
+                    <select name="" class="inputForm" required>
+                        <option value="">Titre de l'article</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                    </select>
+                </div>
+                <div class="article__form__container">
+                    <input type="text" placeholder="Titre de l'article" class="inputForm" required/>
+                </div>
+                <div class="article__form__container">
+                    <textarea name="articleContent" class="article__form__container__textarea" cols="30" rows="10" placeholder="Contenu de l'article"></textarea>
+                </div>
+                <div class="article__form__container--button">
+                    <app-button [button]="create"></app-button>
+                </div>
+            </form>
+        </article>
+    </section>
+</main>

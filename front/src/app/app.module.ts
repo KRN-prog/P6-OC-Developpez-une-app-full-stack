@@ -15,6 +15,11 @@ import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
 import { ArticleSchemeComponent } from './components/article-scheme/article-scheme.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ThemeSchemeComponent } from './components/theme-scheme/theme-scheme.component';
+import { ThemeComponent } from './pages/theme/theme.component';
+import { FormsModule } from '@angular/forms';
+import { RegisterService } from './core/services/register.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,9 +36,11 @@ import { AppRoutingModule } from './app-routing.module';
     ButtonComponent,
     InputComponent,
     ArticleSchemeComponent,
+    ThemeSchemeComponent,
+    ThemeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [RegisterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

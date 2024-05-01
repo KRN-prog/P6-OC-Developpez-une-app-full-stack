@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-article.component.scss']
 })
 export class CreateArticleComponent {
-
+  public create: string = "Créer";
 }
