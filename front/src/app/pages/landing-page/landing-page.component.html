@@ -2,8 +2,10 @@
     <section class="section__landing">
         <article>
             <img src="../../../assets/png/logo.png" alt="MDD Logo" />
-            <app-button (click)="connexionRouting()" [button]="connexionButton"></app-button>
-            <app-button (click)="registerRouting()" [button]="registerButton"></app-button>
+            <div class="article__buttonConnexionLoginSection">
+                <app-button (click)="connexionRouting()" [button]="connexionButton"></app-button>
+                <app-button (click)="registerRouting()" [button]="registerButton"></app-button>
+            </div>
         </article>
     </section>
 </main>

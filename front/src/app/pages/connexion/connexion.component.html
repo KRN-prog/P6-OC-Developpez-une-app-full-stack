@@ -1,1 +1,21 @@
-<p>connexion works!</p>
+<app-header></app-header>
+<main>
+    <section>
+        <article class="article article--form">
+            <h2 class="article__h2">Se connecter</h2>
+            <form action="" class="article__form">
+                <div class="article__form__container">
+                    <label for="emailOrUsername" class="labelForm">E-mail ou nom d’utilisateur</label>
+                    <input type="text" id="emailOrUsername" class="inputForm" required/>
+                </div>
+                <div class="article__form__container">
+                    <label for="password" class="labelForm">Mot de passe</label>
+                    <input type="password" id="password" class="inputForm" required/>
+                </div>
+                <div class="article__form__container--button">
+                    <app-button [button]="login"></app-button>
+                </div>
+            </form>
+        </article>
+    </section>
+</main>

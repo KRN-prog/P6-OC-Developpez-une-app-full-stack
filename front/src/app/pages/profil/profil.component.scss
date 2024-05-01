@@ -1,0 +1,35 @@
+.section{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.article{
+    &__form{
+        &__container{
+            &--button{
+                margin-top: 15px;
+                text-align: center;
+            }   
+        }
+    }
+}
+.logoutContainer{
+    margin-top: 5px;
+    text-align: center;
+    &__text{
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16.94px;
+        text-align: left;
+        color: #A40F0F;
+    }
+}
+.inputForm{
+    width: 281px;
+    height: 48px;
+    margin: 0 0 15px 0;
+    border: 1px solid #000;
+    border-radius: 8px;
+}

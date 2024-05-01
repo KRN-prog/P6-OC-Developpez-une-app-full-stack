@@ -6,7 +6,15 @@
         right: 0;
         bottom: 0;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+    }
+}
+.article{
+    &__buttonConnexionLoginSection{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
 }

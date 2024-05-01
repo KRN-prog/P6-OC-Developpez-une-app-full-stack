@@ -1,0 +1,15 @@
+.article{
+    background: #F5F5F5;
+    padding: 15px;
+    border-radius: 8px;
+    &__h2{
+        margin: 10px 0;
+    }
+    &__contentContainer{
+        font-size: 14px;
+    }
+    &__buttonContainer{
+        text-align: center;
+        margin: 10px 0 5px 0;
+    }
+}

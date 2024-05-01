@@ -1,0 +1,14 @@
+.sectionScheme{
+    width: 90%;
+    margin: auto;
+}
+.articleSchemeContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.articleSceme{
+    display: flex;
+    flex-basis: 40%;
+    margin: 15px 0;
+}
