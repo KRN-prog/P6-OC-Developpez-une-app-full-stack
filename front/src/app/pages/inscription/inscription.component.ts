@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RegisterService } from 'src/app/core/services/register.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-inscription',
@@ -10,24 +11,31 @@ export class InscriptionComponent {
   public signUp: string = 'S’inscrire';
   isSignUpPage: boolean = true;
   formDisabled: boolean = false;
+  formFailure: boolean = false;
 
-  userData = {
+  registerData = {
     email: '',
     username: '',
     password: '',
   };
 
-  constructor(private registerService: RegisterService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   registerUser(): void {
-    this.registerService.registerUser(this.userData).subscribe(
+    this.authService.registerUser(this.registerData).subscribe(
       (response) => {
-        // Traitez la réponse de l'API ici si nécessaire
-        console.log(response);
+        switch (response.response) {
+          case 'User register successfully':
+            this.router.navigate(['/connexion']);
+            break;
+
+          default:
+            this.formFailure = true;
+            break;
+        }
       },
       (error) => {
-        // Gérez les erreurs ici
-        console.error(error);
+        this.formFailure = true;
       }
     );
   }

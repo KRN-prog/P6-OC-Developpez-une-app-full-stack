@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeSchemeComponent } from './components/theme-scheme/theme-scheme.component';
 import { ThemeComponent } from './pages/theme/theme.component';
 import { FormsModule } from '@angular/forms';
-import { RegisterService } from './core/services/register.service';
+import { AuthService } from './core/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -40,7 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     ThemeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [RegisterService],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

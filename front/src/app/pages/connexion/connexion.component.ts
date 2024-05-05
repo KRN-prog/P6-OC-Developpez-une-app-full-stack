@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class ConnexionComponent {
   public login: string = 'Se connecter';
+
+  loginData = {
+    emailOrUsername: '',
+    password: '',
+  };
+
+  loginUser(): void {
+    
+  }
 }
