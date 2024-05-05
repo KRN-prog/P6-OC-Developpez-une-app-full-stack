@@ -12,6 +12,17 @@ export class LandingPageComponent implements OnInit {
 
   constructor(private router: Router) {}
 
+  ngOnInit(): void {
+    if (this.getItem('userToken') != null) {
+      this.router.navigate(['/articles']);
+    }
+  }
+
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
+
   connexionRouting(): void {
     this.router.navigate(['/connexion']);
   }
@@ -19,6 +30,4 @@ export class LandingPageComponent implements OnInit {
   registerRouting(): void {
     this.router.navigate(['/register']);
   }
-
-  ngOnInit(): void {}
 }
