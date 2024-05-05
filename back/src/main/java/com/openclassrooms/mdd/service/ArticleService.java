@@ -1,10 +1,11 @@
 package com.openclassrooms.mdd.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.hibernate.mapping.List;
+import com.openclassrooms.mdd.usecase.dto.ArticleDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +25,16 @@ public class ArticleService {
 
     public ResponseEntity<?> getAllArticles() {
 
-        List articles = articleRepository.findAll();
+        List<ArticleEntity> articles = articleRepository.findAll();
 
         if (articles != null) {
             List<ArticleDto> articleDtos = articles.stream()
                     .map(ArticleMapper::maptoArticleDto)
                     .collect(Collectors.toList());
-            return ResponseEntity.ok(ArticleMapper.maptoArticleDto(articles));
+            return ResponseEntity.ok(articleDtos);
         } else {
             Map<String, String> response = new HashMap<>();
-            response.put("error", "Article error: Cannot retrieve the good article.");
+            response.put("error", "Article error: Cannot retrieve articles.");
             return ResponseEntity.badRequest().body(response);
         }
 

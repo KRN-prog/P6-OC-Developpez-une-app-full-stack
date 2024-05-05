@@ -24,8 +24,8 @@ public class ArticleController {
     }
 
     @GetMapping("/articles")
-    public ResponseEntity<?> getAllArticle(@Valid @PathVariable("id") Integer id) {
-        return this.articleUseCase.getArticleById(id);
+    public ResponseEntity<?> getAllArticle() {
+        return this.articleUseCase.getAllArticles();
     }
 
     @GetMapping("/article/{id}")
