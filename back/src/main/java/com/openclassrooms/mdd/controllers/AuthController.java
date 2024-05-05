@@ -29,7 +29,7 @@ public class AuthController {
         this.userAuthUseCase = userAuthUseCase;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
         return userAuthUseCase.getUser(authRequestDto, authentication);

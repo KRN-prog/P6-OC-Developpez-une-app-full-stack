@@ -14,6 +14,10 @@ public class ArticleUseCase {
 
     private final ArticleService articleService;
 
+    public ResponseEntity<?> getAllArticles() {
+        return articleService.getAllArticles();
+    }
+
     public ResponseEntity<?> getArticleById(Integer articleId) {
         return articleService.getArticleById(articleId);
     }

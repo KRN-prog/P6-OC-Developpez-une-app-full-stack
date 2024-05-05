@@ -2,7 +2,9 @@ package com.openclassrooms.mdd.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.hibernate.mapping.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,23 @@ import lombok.RequiredArgsConstructor;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+
+    public ResponseEntity<?> getAllArticles() {
+
+        List articles = articleRepository.findAll();
+
+        if (articles != null) {
+            List<ArticleDto> articleDtos = articles.stream()
+                    .map(ArticleMapper::maptoArticleDto)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(ArticleMapper.maptoArticleDto(articles));
+        } else {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Article error: Cannot retrieve the good article.");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+    }
 
     public ResponseEntity<?> getArticleById(int articleId) {
 

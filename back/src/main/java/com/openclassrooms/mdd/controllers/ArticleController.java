@@ -23,6 +23,11 @@ public class ArticleController {
         this.articleUseCase = articleUseCase;
     }
 
+    @GetMapping("/articles")
+    public ResponseEntity<?> getAllArticle(@Valid @PathVariable("id") Integer id) {
+        return this.articleUseCase.getArticleById(id);
+    }
+
     @GetMapping("/article/{id}")
     public ResponseEntity<?> getArticleById(@Valid @PathVariable("id") Integer id) {
         return this.articleUseCase.getArticleById(id);
