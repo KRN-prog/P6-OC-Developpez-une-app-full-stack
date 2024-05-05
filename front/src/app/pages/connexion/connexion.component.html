@@ -3,14 +3,17 @@
     <section>
         <article class="article article--form">
             <h2 class="article__h2">Se connecter</h2>
-            <form action="" class="article__form">
+            <div class="modal" *ngIf="formFailure">
+                <span>Un problème c'est produit lors de la connexion</span>
+            </div>
+            <form (ngSubmit)="loginUser()" class="article__form">
                 <div class="article__form__container">
                     <label for="emailOrUsername" class="labelForm">E-mail ou nom d’utilisateur</label>
-                    <input type="text" id="emailOrUsername" class="inputForm" [(ngModel)]="loginData.emailOrUsername" required/>
+                    <input type="text" name="emailOrUsername" id="emailOrUsername" class="inputForm" [(ngModel)]="loginData.email" required/>
                 </div>
                 <div class="article__form__container">
                     <label for="password" class="labelForm">Mot de passe</label>
-                    <input type="password" id="password" class="inputForm" [(ngModel)]="loginData.password" required/>
+                    <input type="password" name="password" id="password" class="inputForm" [(ngModel)]="loginData.password" required/>
                 </div>
                 <div class="article__form__container--button">
                     <app-button [button]="login"></app-button>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,14 +8,25 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private registerUrl = 'http://localhost:8080/mdd/auth/register';
   private loginUrl = 'http://localhost:8080/mdd/auth/login';
+  private authMe = 'localhost:8080/mdd/auth/me';
 
   constructor(private http: HttpClient) {}
+
+  headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
 
   registerUser(registerData: any): Observable<any> {
     return this.http.post<any>(this.registerUrl, registerData);
   }
 
   loginUser(loginData: any): Observable<any> {
-    return this.http.get<any>(this.loginUrl, loginData);
+    return this.http.post<any>(this.loginUrl, loginData, {
+      headers: this.headers,
+    });
+  }
+
+  authUser(authHeaders: HttpHeaders): Observable<any> {
+    return this.http.get<any>(this.authMe, { headers: authHeaders });
   }
 }

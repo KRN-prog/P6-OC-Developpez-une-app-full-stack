@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './inscription.component.html',
   styleUrls: ['./inscription.component.scss'],
 })
-export class InscriptionComponent {
+export class InscriptionComponent implements OnInit {
   public signUp: string = 'S’inscrire';
   isSignUpPage: boolean = true;
   formDisabled: boolean = false;
@@ -20,6 +20,17 @@ export class InscriptionComponent {
   };
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    if (this.getItem('userToken') != null) {
+      this.router.navigate(['/articles']);
+    }
+  }
+
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
 
   registerUser(): void {
     this.authService.registerUser(this.registerData).subscribe(
