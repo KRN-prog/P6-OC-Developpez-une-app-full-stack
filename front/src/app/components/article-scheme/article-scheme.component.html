@@ -1,9 +1,9 @@
 <article class="article">
-    <h2 class="article__h2">Titre de l’article</h2>
+    <h2 class="article__h2">{{ article.titre }}</h2>
     <div class="article__dateAuteurContainer">
-        <span class="article__dateAuteurContainer__date">Date</span><span class="article__dateAuteurContainer__auteur">Auteur</span>
+        <span class="article__dateAuteurContainer__date">{{ article.date }}</span><span class="article__dateAuteurContainer__auteur">{{ article.auteur }}</span>
     </div>
     <div class="article__contentContainer">
-        <span>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</span>
+        <span>{{ article.content }}</span>
     </div>
 </article>

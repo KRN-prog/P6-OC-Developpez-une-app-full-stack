@@ -1,10 +1,10 @@
 <header class="header">
     <nav class="nav">
-        <div><img src="../../../assets/png/logo.png" alt="Mdd logo" class="logo" /></div>
-        <div class="nav__navWrap">
-            <span class="nav__navWrap__select">Articles</span>
-            <span class="nav__navWrap__select">Thèmes</span>
-            <span class="nav__navWrap__select iconWrap">
+        <div><img src="../../../assets/png/logo.png" alt="Mdd logo" class="logo" (click)="gotToHome()" /></div>
+        <div *ngIf="getItem('user')" class="nav__navWrap">
+            <span (click)="goToArticles()" [ngClass]="{'articles-class': isArticlesRoute()}" class="nav__navWrap__select">Articles</span>
+            <span (click)="goToThemes()" [ngClass]="{'themes-class': isThemesRoute()}" class="nav__navWrap__select">Thèmes</span>
+            <span (click)="goToProfil()" class="nav__navWrap__select iconWrap">
                 <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
             </span>
         </div>

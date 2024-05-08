@@ -1,9 +1,10 @@
 <article class="article">
-    <h2 class="article__h2">Titre du thème</h2>
+    <h2 class="article__h2">{{ forTheme.title }}</h2>
     <div class="article__contentContainer">
-        <span>Description: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard...</span>
+        <span>{{ forTheme.contenu }}</span>
     </div>
     <div class="article__buttonContainer">
-        <app-button [button]="subscribeToTheme"></app-button>
+        <button *ngIf="containsSimilarId(forTheme)" (click)="unsubscribeTheme(forTheme)" class="button button--notFilled">Se désabonner</button>
+        <button *ngIf="!containsSimilarId(forTheme)" (click)="subscribeTheme(forTheme)" class="button">S'abonner</button>
     </div>
 </article>

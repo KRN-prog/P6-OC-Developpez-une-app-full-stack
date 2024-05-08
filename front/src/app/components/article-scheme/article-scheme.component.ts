@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-article-scheme',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./article-scheme.component.scss']
 })
 export class ArticleSchemeComponent {
-
+  @Input() article!: any;
 }

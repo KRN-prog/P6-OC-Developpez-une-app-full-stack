@@ -24,6 +24,7 @@
         line-height: 16.94px;
         text-align: left;
         color: #A40F0F;
+        cursor: pointer;
     }
 }
 .inputForm{
@@ -32,4 +33,9 @@
     margin: 0 0 15px 0;
     border: 1px solid #000;
     border-radius: 8px;
+}
+.articleSchemeContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }

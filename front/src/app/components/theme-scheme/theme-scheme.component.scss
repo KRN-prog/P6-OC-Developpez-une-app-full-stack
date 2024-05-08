@@ -2,6 +2,7 @@
     background: #F5F5F5;
     padding: 15px;
     border-radius: 8px;
+    flex-basis: 100%;
     &__h2{
         margin: 10px 0;
     }
@@ -11,5 +12,23 @@
     &__buttonContainer{
         text-align: center;
         margin: 10px 0 5px 0;
+    }
+}
+.button{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    background: none;
+    border: 1px solid #6C5CCF;
+    background-color: #6C5CCF;
+    color: #fff;
+    border-radius: 4px;
+    padding: 5px 15px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    &--notFilled{
+        background-color: #fff;
+        color: #6C5CCF;
     }
 }

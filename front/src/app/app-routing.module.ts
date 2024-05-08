@@ -8,6 +8,7 @@ import { ThemesComponent } from './pages/themes/themes.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { CreateArticleComponent } from './pages/create-article/create-article.component';
 import { NgModule } from '@angular/core';
+import { ThemeComponent } from './pages/theme/theme.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,11 @@ const routes: Routes = [
     component: ThemesComponent,
   },
   {
-    path: 'profil/:id',
+    path: 'theme/:id',
+    component: ThemeComponent,
+  },
+  {
+    path: 'profil',
     component: ProfilComponent,
   },
   {

@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ArticleRequest } from '../models/request/ArticleRequest';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticlesService {
-  private articles = 'localhost:8080/mdd/auth/me';
+  private articles = 'http://localhost:8080/mdd/articles';
+  private article = 'http://localhost:8080/mdd/article/';
+  private postNewArticle = 'http://localhost:8080/mdd/article';
 
   constructor(private http: HttpClient) {}
 
@@ -14,17 +17,19 @@ export class ArticlesService {
     'Content-Type': 'application/json',
   });
 
-  registerUser(registerData: any): Observable<any> {
-    return this.http.post<any>(this.registerUrl, registerData);
+  getAllArticles(): Observable<any> {
+    return this.http.get<any>(this.articles);
   }
 
-  loginUser(loginData: any): Observable<any> {
-    return this.http.post<any>(this.loginUrl, loginData, {
-      headers: this.headers,
-    });
+  getArticle(idArticle: any): Observable<any> {
+    return this.http.get<any>(this.article+idArticle);
   }
 
-  authUser(authHeaders: HttpHeaders): Observable<any> {
-    return this.http.get<any>(this.authMe, { headers: authHeaders });
+  updateArticle(articleReqest: any, idArticle: any): Observable<any> {
+    return this.http.get<any>(this.article, articleReqest)
+  }
+
+  postArticle(articleReqest: any): Observable<any> {
+    return this.http.post<any>(this.postNewArticle, articleReqest)
   }
 }

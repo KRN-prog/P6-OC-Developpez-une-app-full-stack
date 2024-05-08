@@ -1,12 +1,9 @@
 <app-header></app-header>
 <main>
-    <section class="sectionScheme">
-        <app-button [button]="createArticleButton"></app-button>
-        <article class="articleSchemeContainer">
-            <app-article-scheme class="articleSceme"></app-article-scheme>
-            <app-article-scheme class="articleSceme"></app-article-scheme>
-            <app-article-scheme class="articleSceme"></app-article-scheme>
-            <app-article-scheme class="articleSceme"></app-article-scheme>
-        </article>
-    </section>
+    <div class="sectionScheme">
+        <app-button (click)="goToCreateArticles()" [button]="createArticleButton"></app-button>
+        <section class="articleSchemeContainer">
+            <app-article-scheme *ngFor="let article of articles" (click)="goToArticle(article.id)" class="articleSceme" [article]="article"></app-article-scheme>
+        </section>
+    </div>
 </main>

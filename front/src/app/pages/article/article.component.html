@@ -1,1 +1,27 @@
-<p>article works!</p>
+<app-header></app-header>
+<main>
+    <section class="section">
+        <article *ngIf="article">
+            <h2 class="article__h2">{{ article.titre }}</h2>
+            <div class="article__dateAuteurContainer">
+                <span class="article__dateAuteurContainer__date">{{ article.date }}</span><span class="article__dateAuteurContainer__auteur">{{ article.auteur }}</span><span>{{ article.theme }}</span>
+            </div>
+            <div class="article__contentContainer">
+                <span>{{ article.content }}</span>
+            </div>
+        </article>
+    </section>
+    <section class="section section--comments">
+        <article>
+            <h2>Commentaires</h2>
+            <div class="CommentairesContainer">
+                <div>username</div>
+                <div>Contenu du commentaire</div>
+            </div>
+            <form (ngSubmit)="postMessage()" class="form">
+                <input type="text" name="message" placeholder="Ecrivez votre message" class="form__input" [(ngModel)]="messageRequest.message" />
+                <button type="submit" class="form__send">send</button>
+            </form>
+        </article>
+    </section>
+</main>

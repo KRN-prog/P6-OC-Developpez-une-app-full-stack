@@ -15,8 +15,11 @@
                 </div>
             </form>
             <div class="logoutContainer">
-                <span class="logoutContainer__text">Se déconnecter</span>
+                <span class="logoutContainer__text" (click)="logOut()">Se déconnecter</span>
             </div>
         </article>
+    </section>
+    <section class="articleSchemeContainer">
+        <app-theme-scheme *ngFor="let theme of themeList" class="articleSceme" [forTheme]="theme"></app-theme-scheme>
     </section>
 </main>
