@@ -14,6 +14,10 @@ public class ThemesUseCase {
 
     private final ThemesService themesService;
 
+    public ResponseEntity<?> getAllThemes() {
+        return themesService.getAllThemes();
+    }
+
     public ResponseEntity<?> getThemesById(Integer articleId) {
         return themesService.getThemeById(articleId);
     }

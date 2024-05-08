@@ -31,8 +31,7 @@ public class SpringSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/", "/mdd/auth/register", "/mdd/auth/login", "/mdd/auth/me",
-                                "/mdd/article/{id}",
-                                "/mdd/article", "/mdd/post/message", "/mdd/theme/{id}", "/mdd/theme", "/mdd/user/{id}")
+                                "/mdd/article/{id}", "/mdd/article", "/mdd/post/message", "/mdd/get/message", "/mdd/user", "/mdd/user/delete", "/mdd/theme/{id}", "/mdd/theme/{id}", "/mdd/theme", "/mdd/themes", "/mdd/user/{id}", "/mdd/articles")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

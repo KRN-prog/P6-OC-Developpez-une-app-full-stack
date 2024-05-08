@@ -1,5 +1,6 @@
 package com.openclassrooms.mdd.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,6 @@ import com.openclassrooms.mdd.models.ThemesEntity;
 public interface ThemesRepository extends JpaRepository<ThemesEntity, Long> {
 
     Optional<ThemesEntity> findById(Integer articleIdInteger);
+    List<ThemesEntity> findAll();
 
 }

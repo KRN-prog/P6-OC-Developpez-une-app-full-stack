@@ -1,6 +1,8 @@
 package com.openclassrooms.mdd.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,11 @@ public class MessageController {
     @PostMapping("/post/message")
     public ResponseEntity<?> postNewMessage(@Valid @RequestBody MessageRequestDto messageRequestDto) {
         return this.messageUseCase.postNewMessage(messageRequestDto);
+    }
+
+    @GetMapping("/get/message")
+    public ResponseEntity<?> getMessageFromArticle(@Valid @PathVariable Integer idArticle) {
+        return this.messageUseCase.getMessageFromArticle(idArticle);
     }
 
 }

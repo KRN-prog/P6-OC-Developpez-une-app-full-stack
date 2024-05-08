@@ -18,4 +18,8 @@ public class MessageUseCase {
         return messageService.postNewMessage(messageRequestDto);
     }
 
+    public ResponseEntity<?> getMessageFromArticle(int idArticle) {
+        return messageService.getMessageFromArticle(idArticle);
+    }
+
 }

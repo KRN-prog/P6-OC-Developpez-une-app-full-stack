@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.openclassrooms.mdd.models.UserEntity;
 import com.openclassrooms.mdd.service.UserService;
+import com.openclassrooms.mdd.usecase.dto.ThemeUpdateDto;
 import com.openclassrooms.mdd.usecase.dto.UserDto;
 
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,16 @@ public class UserUseCase {
 
     private final UserService userService;
 
-    public ResponseEntity<?> addNewTheme(int articleId) throws JsonMappingException, JsonProcessingException {
-        return userService.addNewTheme(5);
+    public ResponseEntity<?> getUserById(int userId) throws JsonMappingException, JsonProcessingException {
+        return userService.getUserById(userId);
+    }
+
+    public ResponseEntity<?> updateUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
+        return userService.updateUser(themeUpdateDto);
+    }
+
+    public ResponseEntity<?> updateDeleteUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
+        return userService.updateDeleteUser(themeUpdateDto);
     }
 
 }

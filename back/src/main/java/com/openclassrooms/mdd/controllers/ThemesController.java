@@ -2,6 +2,7 @@ package com.openclassrooms.mdd.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,13 @@ public class ThemesController {
         this.themesUseCase = themesUseCase;
     }
 
+    @GetMapping("/themes")
+    public ResponseEntity<?> getAllThemes() {
+        return this.themesUseCase.getAllThemes();
+    }
+
     @GetMapping("/theme/{id}")
-    public ResponseEntity<?> getThemeById(@Valid @RequestBody Integer id) {
+    public ResponseEntity<?> getThemeById(@Valid @PathVariable Integer id) {
         return this.themesUseCase.getThemesById(id);
     }
 

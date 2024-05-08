@@ -29,9 +29,9 @@ public class MessageEntity {
     private String message;
 
     @Column(name = "id_article")
-    private String idArticle;
+    private Integer idArticle;
 
     @Column(name = "id_user")
-    private String idUser;
+    private Integer idUser;
 
 }
