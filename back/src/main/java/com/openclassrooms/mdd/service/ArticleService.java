@@ -48,18 +48,15 @@ public class ArticleService {
 
     }
 
-    public ResponseEntity<?> getArticleById(int articleId) {
+    public ArticleDto getArticleById(int articleId) {
 
         ArticleEntity article = articleRepository.findByArticleId(articleId)
                 .orElse(null);
 
-        if (article != null) {
-            return ResponseEntity.ok(ArticleMapper.maptoArticleDto(article));
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Article error: Cannot retrieve the good article.");
-            return ResponseEntity.badRequest().body(response);
+        if (article == null) {
+            return null;
         }
+        return ArticleMapper.maptoArticleDto(article);
 
     }
 
@@ -79,35 +76,10 @@ public class ArticleService {
     }
 
     @Transactional
-    public ResponseEntity<?> postNewArticle(ArticleRequestDto articleRequestDto) {
-
+    public ArticleDto postNewArticle(ArticleRequestDto articleRequestDto) {
         ArticleEntity article = ArticleRequestMapper.maptoArticle(articleRequestDto);
-        if (articleRepository.save(article) != null) {
-                return ResponseEntity.ok(ArticleMapper.maptoArticleDto(article));
-        }else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Article error: An error has occured");
-            return ResponseEntity.badRequest().body(response);
-        }
-        //return ResponseEntity.ok(articleRepository.save(article));
-        /*if (article != null && article.getTitre().equals(articleRequestDto.getTitre())) {
-            Optional<ThemesEntity> getTheme = themesRepository.findById((long) article.getArticleId());
-            System.out.println(getTheme);
-            if (getTheme != null) {
-                article.getTheme().setId(getTheme.get().getId());
-                System.out.println(article);
-                return ResponseEntity.ok(articleRepository.save(article));
-            }else{
-                Map<String, String> response = new HashMap<>();
-                response.put("error", "Theme error: Cannot retrieve the theme");
-                return ResponseEntity.badRequest().body(response);
-            }
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Article error: Cannot update the article");
-            return ResponseEntity.badRequest().body(response);
-        }*/
-
+        articleRepository.save(article);
+        return ArticleMapper.maptoArticleDto(article);
     }
 
 }

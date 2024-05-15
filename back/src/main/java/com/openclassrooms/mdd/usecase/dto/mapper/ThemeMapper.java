@@ -17,19 +17,24 @@ public class ThemeMapper {
                 themesEntity.getContenu());
     }
 
-    public static Theme_sub maptoThemesEntity(ThemeRequestDto themeRequestDto) {
-        return new Theme_sub(
-                themeRequestDto.getId(),
-                themeRequestDto.getIdUser(),
-                themeRequestDto.getIdTheme());
-    }
+    /*
+     * public static Theme_sub maptoThemesEntity(ThemeRequestDto themeRequestDto) {
+     * return new Theme_sub(
+     * themeRequestDto.getId(),
+     * themeRequestDto.getIdUser(),
+     * themeRequestDto.getIdTheme());
+     * }
+     */
 
-    /*public static ThemesEntity maptoThemesEntity(ThemeRequestDto themeRequestDto) {
-        return new ThemesEntity(
-                themeRequestDto.getId(),
-                themeRequestDto.getTheme(),
-                themeRequestDto.getTitle(),
-                themeRequestDto.getContenu());
-    }*/
+    /*
+     * public static ThemesEntity maptoThemesEntity(ThemeRequestDto themeRequestDto)
+     * {
+     * return new ThemesEntity(
+     * themeRequestDto.getId(),
+     * themeRequestDto.getTheme(),
+     * themeRequestDto.getTitle(),
+     * themeRequestDto.getContenu());
+     * }
+     */
 
 }

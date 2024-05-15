@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mdd.service.ArticleService;
+import com.openclassrooms.mdd.usecase.dto.ArticleDto;
+import com.openclassrooms.mdd.usecase.dto.UserDto;
 import com.openclassrooms.mdd.usecase.dto.request.ArticleRequestDto;
 
 import lombok.RequiredArgsConstructor;
@@ -18,15 +20,19 @@ public class ArticleUseCase {
         return articleService.getAllArticles();
     }
 
-    public ResponseEntity<?> getArticleById(Integer articleId) {
-        return articleService.getArticleById(articleId);
+    public ArticleDto getArticleById(Integer articleId) {
+        ArticleDto articleDto = articleService.getArticleById(articleId);
+        if (articleDto == null) {
+            return null;
+        }
+        return articleDto;
     }
 
     public ResponseEntity<?> updateArticleById(ArticleRequestDto articleRequestDto, int articleId) {
         return articleService.updateArticleById(articleRequestDto, articleId);
     }
 
-    public ResponseEntity<?> postNewArticle(ArticleRequestDto articleRequestDto) {
+    public ArticleDto postNewArticle(ArticleRequestDto articleRequestDto) {
         return articleService.postNewArticle(articleRequestDto);
     }
 

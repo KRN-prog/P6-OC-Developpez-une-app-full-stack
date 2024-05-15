@@ -9,8 +9,7 @@ public class UserMapper {
                 userEntity.getUserId(),
                 userEntity.getUsername(),
                 userEntity.getEmail(),
-                userEntity.getPassword(),
-                userEntity.getThemes());
+                userEntity.getPassword());
     }
 
     public static UserEntity maptoUser(UserDto userDto) {
@@ -18,7 +17,6 @@ public class UserMapper {
                 userDto.getId(),
                 userDto.getUsername(),
                 userDto.getMail(),
-                userDto.getPassword(),
-                "[]");
+                userDto.getPassword());
     }
 }

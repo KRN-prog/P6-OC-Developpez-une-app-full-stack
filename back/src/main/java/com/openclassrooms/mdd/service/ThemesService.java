@@ -57,12 +57,14 @@ public class ThemesService {
 
     }
 
-    public ResponseEntity<?> postNewTheme(ThemeRequestDto themeRequestDto) {
-
-        Theme_sub article = ThemeMapper.maptoThemesEntity(themeRequestDto);
-
-        return ResponseEntity.ok(themesRepository.save(article));
-
-    }
+    /*
+     * public ResponseEntity<?> postNewTheme(ThemeRequestDto themeRequestDto) {
+     * 
+     * Theme_sub article = ThemeMapper.maptoThemesEntity(themeRequestDto);
+     * 
+     * return ResponseEntity.ok(themesRepository.save(article));
+     * 
+     * }
+     */
 
 }

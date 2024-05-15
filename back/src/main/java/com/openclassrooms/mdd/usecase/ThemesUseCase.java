@@ -22,8 +22,10 @@ public class ThemesUseCase {
         return themesService.getThemeById(articleId);
     }
 
-    public ResponseEntity<?> postNewTheme(ThemeRequestDto themeRequestDto) {
-        return themesService.postNewTheme(themeRequestDto);
-    }
+    /*
+     * public ResponseEntity<?> postNewTheme(ThemeRequestDto themeRequestDto) {
+     * return themesService.postNewTheme(themeRequestDto);
+     * }
+     */
 
 }

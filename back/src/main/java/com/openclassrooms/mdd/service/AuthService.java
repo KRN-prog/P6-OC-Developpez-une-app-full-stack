@@ -38,46 +38,36 @@ public class AuthService {
         return UserMapper.maptoUserDto(userEntity);
     }
 
-    public ResponseEntity<?> getUser(AuthRequestDto authRequestDto, Authentication authentication)
+    public TokenResponse getUser(AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
 
         UserEntity user = authRepository.findByUsernameOrEmail(authRequestDto.getEmail(), authRequestDto.getUsername())
                 .orElse(null);
 
-        if (user != null && user.getPassword().equals(authRequestDto.getPassword())) {
-            UserDto userDto = UserMapper.maptoUserDto(user);
-
-            String token = jwtService.genrerateToken(userDto, null, authentication);
-
-            TokenResponse tokenResponse = new TokenResponse();
-            tokenResponse.setToken(token);
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            return ResponseEntity.ok(objectMapper.writeValueAsString(tokenResponse));
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Login error: Invalid credentials");
-            return ResponseEntity.badRequest().body(response);
+        if (user == null) {
+            return null;
         }
+        UserDto userDto = UserMapper.maptoUserDto(user);
+
+        String token = jwtService.genrerateToken(userDto, null, authentication);
+
+        TokenResponse tokenResponse = new TokenResponse();
+        tokenResponse.setToken(token);
+
+        return tokenResponse;
 
     }
 
-    public ResponseEntity<?> registerUser(UserDto userDto) {
+    public UserEntity registerUser(UserDto userDto) {
 
         UserEntity user = authRepository.findByUsernameOrEmail(userDto.getMail(), userDto.getUsername())
                 .orElse(null);
 
         if (user == null) {
             UserEntity userEntity = UserMapper.maptoUser(userDto);
-            authRepository.save(userEntity);
-            Map<String, String> response = new HashMap<>();
-            response.put("response", "User register successfully");
-            return ResponseEntity.ok(response);
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Register error: Invalid credentials");
-            return ResponseEntity.badRequest().body(response);
+            return authRepository.save(userEntity);
         }
+        return null;
 
     }
 

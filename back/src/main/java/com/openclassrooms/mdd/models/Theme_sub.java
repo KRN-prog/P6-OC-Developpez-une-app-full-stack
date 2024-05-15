@@ -1,6 +1,5 @@
 package com.openclassrooms.mdd.models;
 
-import javax.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,12 +15,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "themes_sub")
 public class Theme_sub {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idSub;
 
-    @ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "id_user", nullable = false)
     private UserEntity user;
 

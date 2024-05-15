@@ -31,9 +31,12 @@ public class ThemesController {
         return this.themesUseCase.getThemesById(id);
     }
 
-    @PostMapping("/theme")
-    public ResponseEntity<?> postNewTheme(@Valid @RequestBody ThemeRequestDto themeRequestDto) {
-        return this.themesUseCase.postNewTheme(themeRequestDto);
-    }
+    /*
+     * @PostMapping("/theme")
+     * public ResponseEntity<?> postNewTheme(@Valid @RequestBody ThemeRequestDto
+     * themeRequestDto) {
+     * return this.themesUseCase.postNewTheme(themeRequestDto);
+     * }
+     */
 
 }

@@ -38,7 +38,7 @@ public class UserService {
 
         UserEntity user = authRepository.findByUserId(userId)
                 .orElse(null);
-        
+
         if (user != null) {
             return ResponseEntity.ok(UserMapper.maptoUserDto(user));
         } else {
@@ -49,63 +49,65 @@ public class UserService {
 
     }
 
-    public ResponseEntity<?> updateUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
+    public UserEntity updateUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
 
         UserEntity user = authRepository.findByUserId(themeUpdateDto.getId_user())
                 .orElse(null);
-        
-        if (user != null) {
-            UserDto userDto = UserMapper.maptoUserDto(user);
-            // System.out.println(userDto.getThemes());
-            System.out.println(user);
 
-            // Récupérer les thèmes existants depuis le DTO
-            String themesJsonString = userDto.getThemes();
-
-            // Convertir la chaîne JSON en un tableau JSON
-            ObjectMapper objectMapper = new ObjectMapper();
-            ArrayNode themesArray;
-            try {
-                themesArray = (ArrayNode) objectMapper.readTree(themesJsonString);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Gérer l'erreur de désérialisation JSON
-                return null;
-            }
-
-            // Ajouter la nouvelle valeur au tableau JSON
-            themesArray.add(themeUpdateDto.getId_article());
-
-            // Convertir le tableau JSON mis à jour en une chaîne JSON
-            String updatedThemesJsonString;
-            try {
-                updatedThemesJsonString = objectMapper.writeValueAsString(themesArray);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Gérer l'erreur de sérialisation JSON
-                return null;
-            }
-
-            // Mettre à jour les thèmes de l'entité avec les nouveaux thèmes combinés
-            user.setThemes(updatedThemesJsonString);
-            System.out.println(user);
-
-            return ResponseEntity.ok(authRepository.save(user));
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Login error: Invalid credentials");
-            return ResponseEntity.badRequest().body(response);
-        }
+        return user;
+        /*
+         * if (user != null) {
+         * UserDto userDto = UserMapper.maptoUserDto(user);
+         * // System.out.println(userDto.getThemes());
+         * System.out.println(user);
+         * 
+         * // Récupérer les thèmes existants depuis le DTO
+         * String themesJsonString = userDto.getThemes();
+         * 
+         * // Convertir la chaîne JSON en un tableau JSON
+         * ObjectMapper objectMapper = new ObjectMapper();
+         * ArrayNode themesArray;
+         * try {
+         * themesArray = (ArrayNode) objectMapper.readTree(themesJsonString);
+         * } catch (Exception e) {
+         * e.printStackTrace();
+         * // Gérer l'erreur de désérialisation JSON
+         * return null;
+         * }
+         * 
+         * // Ajouter la nouvelle valeur au tableau JSON
+         * themesArray.add(themeUpdateDto.getId_article());
+         * 
+         * // Convertir le tableau JSON mis à jour en une chaîne JSON
+         * String updatedThemesJsonString;
+         * try {
+         * updatedThemesJsonString = objectMapper.writeValueAsString(themesArray);
+         * } catch (Exception e) {
+         * e.printStackTrace();
+         * // Gérer l'erreur de sérialisation JSON
+         * return null;
+         * }
+         * 
+         * // Mettre à jour les thèmes de l'entité avec les nouveaux thèmes combinés
+         * user.setThemes(updatedThemesJsonString);
+         * System.out.println(user);
+         * 
+         * return ResponseEntity.ok(authRepository.save(user));
+         * } else {
+         * Map<String, String> response = new HashMap<>();
+         * response.put("error", "Login error: Invalid credentials");
+         * return ResponseEntity.badRequest().body(response);
+         * }
+         */
 
     }
 
-
-
-    public ResponseEntity<?> updateDeleteUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
+    public ResponseEntity<?> updateDeleteUser(ThemeUpdateDto themeUpdateDto)
+            throws JsonMappingException, JsonProcessingException {
 
         UserEntity user = authRepository.findByUserId(themeUpdateDto.getId_user())
                 .orElse(null);
-        
+
         if (user != null) {
 
             UserDto userDto = UserMapper.maptoUserDto(user);
@@ -113,39 +115,41 @@ public class UserService {
             System.out.println(user);
 
             // Récupérer les thèmes existants depuis le DTO
-            //ThemesEntity themesJsonString = userDto.getThemes();
-            
+            // ThemesEntity themesJsonString = userDto.getThemes();
+
             /*
-            ObjectMapper objectMapper = new ObjectMapper();
-            ArrayNode themesArray;
-            try {
-                themesArray = (ArrayNode) objectMapper.readTree(themesJsonString);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Gérer l'erreur de désérialisation JSON
-                return null;
-            }
+             * ObjectMapper objectMapper = new ObjectMapper();
+             * ArrayNode themesArray;
+             * try {
+             * themesArray = (ArrayNode) objectMapper.readTree(themesJsonString);
+             * } catch (Exception e) {
+             * e.printStackTrace();
+             * // Gérer l'erreur de désérialisation JSON
+             * return null;
+             * }
+             * 
+             * // Créer un nouveau tableau JSON sans la valeur à supprimer
+             * ArrayNode updatedThemesArray = objectMapper.createArrayNode();
+             * for (JsonNode node : themesArray) {
+             * if (!node.asText().equals(themeUpdateDto.getId_article())) {
+             * updatedThemesArray.add(node);
+             * }
+             * }
+             * 
+             * // Convertir le nouveau tableau JSON en une chaîne JSON
+             * String updatedThemesJsonString;
+             * try {
+             * updatedThemesJsonString =
+             * objectMapper.writeValueAsString(updatedThemesArray);
+             * } catch (Exception e) {
+             * e.printStackTrace();
+             * // Gérer l'erreur de sérialisation JSON
+             * return null;
+             * }
+             */
 
-            // Créer un nouveau tableau JSON sans la valeur à supprimer
-            ArrayNode updatedThemesArray = objectMapper.createArrayNode();
-            for (JsonNode node : themesArray) {
-                if (!node.asText().equals(themeUpdateDto.getId_article())) {
-                    updatedThemesArray.add(node);
-                }
-            }
+            // user.setThemes(themeUpdateDto.getId_article());
 
-            // Convertir le nouveau tableau JSON en une chaîne JSON
-            String updatedThemesJsonString;
-            try {
-                updatedThemesJsonString = objectMapper.writeValueAsString(updatedThemesArray);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Gérer l'erreur de sérialisation JSON
-                return null;
-            }*/
-
-            //user.setThemes(themeUpdateDto.getId_article());
-            
             return ResponseEntity.ok(authRepository.save(user));
         } else {
             Map<String, String> response = new HashMap<>();

@@ -24,7 +24,4 @@ public class UserDto {
     @JsonProperty("password")
     private String password;
 
-    @JsonProperty("themes")
-    private String themes;
-
 }
