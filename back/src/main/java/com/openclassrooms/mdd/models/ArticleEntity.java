@@ -1,10 +1,13 @@
 package com.openclassrooms.mdd.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +26,7 @@ public class ArticleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long articleId;
 
     @Column(name = "titre")
     private String titre;
@@ -37,7 +40,8 @@ public class ArticleEntity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "theme")
-    private String theme;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "theme_id")
+    private ThemesEntity theme;
 
 }

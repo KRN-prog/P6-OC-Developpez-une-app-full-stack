@@ -7,10 +7,10 @@ public class MessageMapper {
     
     public static MessageDto maptoMessageDto(MessageEntity messageEntity) {
         return new MessageDto(
-                messageEntity.getId(),
+                messageEntity.getMessageId(),
                 messageEntity.getMessage(),
-                messageEntity.getIdArticle(),
-                messageEntity.getIdUser());
+                messageEntity.getArticle(),
+                messageEntity.getUser());
     }
 
     public static MessageEntity maptoMessageEntity(MessageDto messageDto) {

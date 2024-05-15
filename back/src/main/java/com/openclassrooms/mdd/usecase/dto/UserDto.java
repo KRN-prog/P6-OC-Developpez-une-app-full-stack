@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto {
 
-    private int id;
+    private Integer id;
 
     @JsonProperty("username")
     private String username;

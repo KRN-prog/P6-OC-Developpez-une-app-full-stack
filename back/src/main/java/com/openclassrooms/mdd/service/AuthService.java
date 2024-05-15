@@ -34,14 +34,14 @@ public class AuthService {
     }
 
     public UserDto findByMail(String userEmail) {
-        UserEntity userEntity = authRepository.findByMail(userEmail).get();
+        UserEntity userEntity = authRepository.findByEmail(userEmail).get();
         return UserMapper.maptoUserDto(userEntity);
     }
 
     public ResponseEntity<?> getUser(AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
 
-        UserEntity user = authRepository.findByUsernameOrMail(authRequestDto.getEmail(), authRequestDto.getUsername())
+        UserEntity user = authRepository.findByUsernameOrEmail(authRequestDto.getEmail(), authRequestDto.getUsername())
                 .orElse(null);
 
         if (user != null && user.getPassword().equals(authRequestDto.getPassword())) {
@@ -64,7 +64,7 @@ public class AuthService {
 
     public ResponseEntity<?> registerUser(UserDto userDto) {
 
-        UserEntity user = authRepository.findByUsernameOrMail(userDto.getMail(), userDto.getUsername())
+        UserEntity user = authRepository.findByUsernameOrEmail(userDto.getMail(), userDto.getUsername())
                 .orElse(null);
 
         if (user == null) {

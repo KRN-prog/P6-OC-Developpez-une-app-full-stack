@@ -1,6 +1,8 @@
 package com.openclassrooms.mdd.usecase.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.openclassrooms.mdd.models.ThemesEntity;
+import com.openclassrooms.mdd.models.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +17,10 @@ public class ThemeRequestDto {
 
     private int id;
 
-    @JsonProperty("theme")
-    private String theme;
+    @JsonProperty("id_user")
+    private UserEntity idUser;
 
-    @JsonProperty("title")
-    private String title;
-
-    @JsonProperty("contenu")
-    private String contenu;
+    @JsonProperty("id_theme")
+    private ThemesEntity idTheme;
 
 }

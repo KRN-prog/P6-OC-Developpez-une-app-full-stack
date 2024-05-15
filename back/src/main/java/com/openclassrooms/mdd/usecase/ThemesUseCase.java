@@ -18,7 +18,7 @@ public class ThemesUseCase {
         return themesService.getAllThemes();
     }
 
-    public ResponseEntity<?> getThemesById(Integer articleId) {
+    public ResponseEntity<?> getThemesById(Long articleId) {
         return themesService.getThemeById(articleId);
     }
 

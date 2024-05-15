@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mdd.models.Theme_sub;
 import com.openclassrooms.mdd.models.ThemesEntity;
 import com.openclassrooms.mdd.repository.ThemesRepository;
 import com.openclassrooms.mdd.usecase.dto.ArticleDto;
@@ -41,7 +42,7 @@ public class ThemesService {
 
     }
 
-    public ResponseEntity<?> getThemeById(int articleId) {
+    public ResponseEntity<?> getThemeById(Long articleId) {
 
         ThemesEntity theme = themesRepository.findById(articleId)
                 .orElse(null);
@@ -58,7 +59,7 @@ public class ThemesService {
 
     public ResponseEntity<?> postNewTheme(ThemeRequestDto themeRequestDto) {
 
-        ThemesEntity article = ThemeMapper.maptoThemesEntity(themeRequestDto);
+        Theme_sub article = ThemeMapper.maptoThemesEntity(themeRequestDto);
 
         return ResponseEntity.ok(themesRepository.save(article));
 

@@ -39,7 +39,7 @@ public class MessageService {
 
     public ResponseEntity<?> getMessageFromArticle(int idArticle) {
 
-        List<MessageEntity> message = messageRepository.findAllById(idArticle);
+        List<MessageEntity> message = messageRepository.findAllByMessageId(idArticle);
         
         if (message != null) {
             List<MessageDto> themesDtos = message.stream()

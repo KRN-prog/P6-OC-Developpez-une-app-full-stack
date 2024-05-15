@@ -1,19 +1,18 @@
 package com.openclassrooms.mdd.usecase.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.openclassrooms.mdd.models.ThemesEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleDto {
-
+public class ArticleSaved {
+    
     private Long id;
 
     @JsonProperty("titre")
@@ -29,5 +28,5 @@ public class ArticleDto {
     private String content;
 
     @JsonProperty("theme")
-    private ThemesEntity theme;
+    private int theme;
 }

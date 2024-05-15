@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ThemeDto {
 
-    private int id;
+    private Long id;
 
     @JsonProperty("theme")
     private String theme;

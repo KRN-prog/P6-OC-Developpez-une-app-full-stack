@@ -23,7 +23,8 @@ public class ThemesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "theme_id")
+    private Long id;
 
     @Column(name = "theme")
     private String theme;

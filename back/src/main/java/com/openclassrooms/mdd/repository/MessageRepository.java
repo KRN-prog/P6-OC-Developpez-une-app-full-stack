@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.openclassrooms.mdd.models.MessageEntity;
 
 @Repository
-public interface MessageRepository extends JpaRepository<MessageEntity, Long> {
-    List<MessageEntity> findAllById(int idArticle);
+public interface MessageRepository extends JpaRepository<MessageEntity, Integer> {
+    List<MessageEntity> findAllByMessageId(Integer idArticle);
 }

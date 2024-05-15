@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.openclassrooms.mdd.models.ThemesEntity;
 import com.openclassrooms.mdd.models.UserEntity;
 import com.openclassrooms.mdd.repository.AuthRepository;
 import com.openclassrooms.mdd.usecase.dto.ThemeUpdateDto;
@@ -28,14 +29,14 @@ public class UserService {
     /*
      * public Optional<UserEntity> addNewTheme(int articleId) {
      * 
-     * return authRepository.findById(articleId);
+     * return authRepository.findByUserId(articleId);
      * 
      * }
      */
 
     public ResponseEntity<?> getUserById(int userId) throws JsonMappingException, JsonProcessingException {
 
-        UserEntity user = authRepository.findById(userId)
+        UserEntity user = authRepository.findByUserId(userId)
                 .orElse(null);
         
         if (user != null) {
@@ -50,7 +51,7 @@ public class UserService {
 
     public ResponseEntity<?> updateUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
 
-        UserEntity user = authRepository.findById(themeUpdateDto.getId_user())
+        UserEntity user = authRepository.findByUserId(themeUpdateDto.getId_user())
                 .orElse(null);
         
         if (user != null) {
@@ -102,7 +103,7 @@ public class UserService {
 
     public ResponseEntity<?> updateDeleteUser(ThemeUpdateDto themeUpdateDto) throws JsonMappingException, JsonProcessingException {
 
-        UserEntity user = authRepository.findById(themeUpdateDto.getId_user())
+        UserEntity user = authRepository.findByUserId(themeUpdateDto.getId_user())
                 .orElse(null);
         
         if (user != null) {
@@ -112,8 +113,9 @@ public class UserService {
             System.out.println(user);
 
             // Récupérer les thèmes existants depuis le DTO
-            String themesJsonString = userDto.getThemes();
+            //ThemesEntity themesJsonString = userDto.getThemes();
             
+            /*
             ObjectMapper objectMapper = new ObjectMapper();
             ArrayNode themesArray;
             try {
@@ -140,9 +142,9 @@ public class UserService {
                 e.printStackTrace();
                 // Gérer l'erreur de sérialisation JSON
                 return null;
-            }
+            }*/
 
-            user.setThemes(updatedThemesJsonString);
+            //user.setThemes(themeUpdateDto.getId_article());
             
             return ResponseEntity.ok(authRepository.save(user));
         } else {

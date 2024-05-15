@@ -11,7 +11,7 @@ import com.openclassrooms.mdd.models.ThemesEntity;
 @Repository
 public interface ThemesRepository extends JpaRepository<ThemesEntity, Long> {
 
-    Optional<ThemesEntity> findById(Integer articleIdInteger);
+    Optional<ThemesEntity> findById(Long themeId);
     List<ThemesEntity> findAll();
 
 }

@@ -7,7 +7,7 @@ public class ArticleMapper {
 
     public static ArticleDto maptoArticleDto(ArticleEntity articleEntity) {
         return new ArticleDto(
-                articleEntity.getId(),
+                articleEntity.getArticleId(),
                 articleEntity.getTitre(),
                 articleEntity.getDate(),
                 articleEntity.getAuteur(),

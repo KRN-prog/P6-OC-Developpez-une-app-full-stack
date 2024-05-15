@@ -1,5 +1,8 @@
 package com.openclassrooms.mdd.usecase.dto.request;
 
+import com.openclassrooms.mdd.models.ArticleEntity;
+import com.openclassrooms.mdd.models.UserEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class MessageRequestDto {
 
     private String message;
-    private Integer idArticle;
-    private Integer idUser;
+    private ArticleEntity idArticle;
+    private UserEntity idUser;
 
 }

@@ -11,7 +11,7 @@ import com.openclassrooms.mdd.models.ArticleEntity;
 @Repository
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 
-    Optional<ArticleEntity> findById(Integer articleIdInteger);
+    Optional<ArticleEntity> findByArticleId(int articleId);
 
     List<ArticleEntity> findAll();
 

@@ -27,7 +27,7 @@ public class ThemesController {
     }
 
     @GetMapping("/theme/{id}")
-    public ResponseEntity<?> getThemeById(@Valid @PathVariable Integer id) {
+    public ResponseEntity<?> getThemeById(@Valid @PathVariable Long id) {
         return this.themesUseCase.getThemesById(id);
     }
 

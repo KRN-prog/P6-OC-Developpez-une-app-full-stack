@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,15 +25,18 @@ public class MessageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "message_id")
+    private Integer messageId;
 
     @Column(name = "message")
     private String message;
 
-    @Column(name = "id_article")
-    private Integer idArticle;
+    @ManyToOne
+    @JoinColumn(name = "id_article")
+    private ArticleEntity article;
 
-    @Column(name = "id_user")
-    private Integer idUser;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private UserEntity user;
 
 }

@@ -1,6 +1,8 @@
 package com.openclassrooms.mdd.usecase.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.openclassrooms.mdd.models.ArticleEntity;
+import com.openclassrooms.mdd.models.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,15 +15,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MessageDto {
 
-    private Integer id;
+    private int id;
 
     @JsonProperty("message")
     private String message;
 
     @JsonProperty("id_article")
-    private Integer idArticle;
+    private ArticleEntity idArticle;
 
     @JsonProperty("id_user")
-    private Integer idUser;
+    private UserEntity idUser;
 
 }

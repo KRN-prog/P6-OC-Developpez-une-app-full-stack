@@ -6,9 +6,9 @@ import com.openclassrooms.mdd.usecase.dto.UserDto;
 public class UserMapper {
     public static UserDto maptoUserDto(UserEntity userEntity) {
         return new UserDto(
-                userEntity.getId(),
+                userEntity.getUserId(),
                 userEntity.getUsername(),
-                userEntity.getMail(),
+                userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.getThemes());
     }
