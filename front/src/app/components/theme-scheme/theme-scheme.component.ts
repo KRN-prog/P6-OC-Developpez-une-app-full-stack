@@ -36,12 +36,14 @@ export class ThemeSchemeComponent {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  containsSimilarId(theme: any): boolean {
-    let themeStringArr = this.getItem("user").themes
-    let arrParse =  JSON.parse(themeStringArr);
+  containsSimilarId(theme: any): any {
+    if (this.getItem("user").themes) {
+      let themeStringArr = this.getItem("user").themes
+      let arrParse =  JSON.parse(themeStringArr);
 
-    //return arrParse.some((item: { id: any; }) => themeId.includes(item.id));
-    return arrParse.some((themeId: { id: any; }) => themeId === theme.id);
+      //return arrParse.some((item: { id: any; }) => themeId.includes(item.id));
+      return arrParse.some((themeId: { id: any; }) => themeId === theme.id); 
+    }
   }
 
   subscribeTheme(theme: any): void {
