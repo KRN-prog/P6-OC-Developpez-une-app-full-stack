@@ -3,22 +3,17 @@ package com.openclassrooms.mdd.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.openclassrooms.mdd.usecase.dto.ArticleDto;
-import com.openclassrooms.mdd.usecase.dto.ThemeDto;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mdd.models.ArticleEntity;
-import com.openclassrooms.mdd.models.ThemesEntity;
 import com.openclassrooms.mdd.repository.ArticleRepository;
-import com.openclassrooms.mdd.repository.ThemesRepository;
 import com.openclassrooms.mdd.usecase.dto.mapper.ArticleMapper;
 import com.openclassrooms.mdd.usecase.dto.mapper.ArticleRequestMapper;
-import com.openclassrooms.mdd.usecase.dto.mapper.ThemeMapper;
 import com.openclassrooms.mdd.usecase.dto.request.ArticleRequestDto;
 
 import jakarta.transaction.Transactional;
@@ -29,22 +24,18 @@ import lombok.RequiredArgsConstructor;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-    private final ThemesRepository themesRepository;
 
-    public ResponseEntity<?> getAllArticles() {
+    public List<ArticleDto> getAllArticles() {
 
         List<ArticleEntity> articles = articleRepository.findAll();
 
-        if (articles != null) {
-            List<ArticleDto> articleDtos = articles.stream()
-                    .map(ArticleMapper::maptoArticleDto)
-                    .collect(Collectors.toList());
-            return ResponseEntity.ok(articleDtos);
-        } else {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "Article error: Cannot retrieve articles.");
-            return ResponseEntity.badRequest().body(response);
+        if (articles == null) {
+            return null;
         }
+        List<ArticleDto> articleDtos = articles.stream()
+                .map(ArticleMapper::maptoArticleDto)
+                .collect(Collectors.toList());
+        return articleDtos;
 
     }
 

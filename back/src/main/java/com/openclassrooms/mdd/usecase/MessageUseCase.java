@@ -1,9 +1,11 @@
 package com.openclassrooms.mdd.usecase;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mdd.service.MessageService;
+import com.openclassrooms.mdd.usecase.dto.MessageDto;
 import com.openclassrooms.mdd.usecase.dto.request.MessageRequestDto;
 
 import lombok.RequiredArgsConstructor;
@@ -14,12 +16,17 @@ public class MessageUseCase {
 
     private final MessageService messageService;
 
-    public ResponseEntity<?> postNewMessage(MessageRequestDto messageRequestDto) {
+    public MessageDto postNewMessage(MessageRequestDto messageRequestDto) {
         return messageService.postNewMessage(messageRequestDto);
     }
 
-    public ResponseEntity<?> getMessageFromArticle(int idArticle) {
-        return messageService.getMessageFromArticle(idArticle);
+    public List<MessageDto> getMessageFromArticle(int idArticle) {
+        List<MessageDto> messageDtos = messageService.getMessageFromArticle(idArticle);
+
+        if (messageDtos == null) {
+            return null;
+        }
+        return messageDtos;
     }
 
 }

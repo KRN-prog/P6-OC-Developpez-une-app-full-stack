@@ -9,6 +9,7 @@ import com.openclassrooms.mdd.usecase.dto.request.ArticleRequestDto;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,13 @@ public class ArticleController {
 
     @GetMapping("/articles")
     public ResponseEntity<?> getAllArticle() {
-        return this.articleUseCase.getAllArticles();
+        List<ArticleDto> articleDtos = this.articleUseCase.getAllArticles();
+        Map<String, String> response = new HashMap<>();
+        if (articleDtos == null) {
+            response.put("error", "Article error: Cannot retrieve articles.");
+            return ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.ok(articleDtos);
     }
 
     @GetMapping("/article/{id}")
@@ -55,13 +62,12 @@ public class ArticleController {
     @PostMapping("/article")
     public ResponseEntity<?> postNewArticle(@Valid @RequestBody ArticleRequestDto articleRequestDto) {
         ArticleDto articleDto = this.articleUseCase.postNewArticle(articleRequestDto);
-        if (articleDto != null) {
-            return ResponseEntity.ok(articleDto);
-        } else {
+        if (articleDto == null) {
             Map<String, String> response = new HashMap<>();
             response.put("error", "Article error: Cannot update the article");
             return ResponseEntity.badRequest().body(response);
         }
+        return ResponseEntity.ok(articleDto);
     }
 
 }

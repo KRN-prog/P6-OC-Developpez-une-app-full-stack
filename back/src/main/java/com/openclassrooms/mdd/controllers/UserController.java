@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.openclassrooms.mdd.models.UserEntity;
 import com.openclassrooms.mdd.usecase.UserUseCase;
-import com.openclassrooms.mdd.usecase.dto.ThemeUpdateDto;
+import com.openclassrooms.mdd.usecase.dto.request.UpdateUserRequestDto;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,18 +34,16 @@ public class UserController {
         return userUseCase.getUserById(userId);
     }
 
-    /*
-     * @PutMapping()
-     * public ResponseEntity<?> updateUser(@Valid @RequestBody ThemeUpdateDto
-     * themeUpdateDto) throws JsonMappingException, JsonProcessingException {
-     * return userUseCase.updateUser(themeUpdateDto);
-     * }
-     */
-
-    @PutMapping("/delete")
-    public ResponseEntity<?> updateDeleteUser(@Valid @RequestBody ThemeUpdateDto themeUpdateDto)
-            throws JsonMappingException, JsonProcessingException {
-        return userUseCase.updateDeleteUser(themeUpdateDto);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@Valid @PathVariable("id") Long userId,
+            @RequestBody UpdateUserRequestDto updateUserRequestDto) {
+        UserEntity updateUser = userUseCase.updateUser(userId, updateUserRequestDto);
+        if (updateUser == null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Impossible to update the user");
+            return ResponseEntity.badRequest().body(response);
+        }
+        return ResponseEntity.ok(updateUser);
     }
 
 }

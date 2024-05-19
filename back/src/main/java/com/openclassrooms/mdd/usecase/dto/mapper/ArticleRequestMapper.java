@@ -7,9 +7,13 @@ import com.openclassrooms.mdd.usecase.dto.request.ArticleRequestDto;
 public class ArticleRequestMapper {
 
     public static ArticleEntity maptoArticle(ArticleRequestDto articleRequestDto) {
-        return ArticleEntity.builder().titre(articleRequestDto.getTitre()).date(articleRequestDto.getDate())
-                .auteur(articleRequestDto.getAuteur()).content(articleRequestDto.getContent())
-                .theme(articleRequestDto.getTheme()).build();
+        return ArticleEntity.builder()
+                .titre(articleRequestDto.getTitre())
+                .date(articleRequestDto.getDate())
+                .auteur(articleRequestDto.getAuteur())
+                .content(articleRequestDto.getContent())
+                .theme(articleRequestDto.getTheme())
+                .build();
     }
 
     public static ArticleSaved maptoArticleSaved(ArticleEntity articleEntity) {

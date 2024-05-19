@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class MessageRequestDto {
 
     private String message;
-    private ArticleEntity idArticle;
-    private UserEntity idUser;
+    private ArticleEntity articleId;
+    private UserEntity userId;
 
 }

@@ -1,7 +1,6 @@
 package com.openclassrooms.mdd.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.mdd.models.UserEntity;
 import com.openclassrooms.mdd.repository.AuthRepository;
 import com.openclassrooms.mdd.usecase.dto.UserDto;
@@ -11,11 +10,7 @@ import com.openclassrooms.mdd.usecase.dto.response.TokenResponse;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 

@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 

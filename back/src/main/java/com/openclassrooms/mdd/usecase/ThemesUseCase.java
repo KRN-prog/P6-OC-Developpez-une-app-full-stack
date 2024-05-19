@@ -1,10 +1,11 @@
 package com.openclassrooms.mdd.usecase;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mdd.service.ThemesService;
-import com.openclassrooms.mdd.usecase.dto.request.ThemeRequestDto;
+import com.openclassrooms.mdd.usecase.dto.ThemeDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,18 +15,23 @@ public class ThemesUseCase {
 
     private final ThemesService themesService;
 
-    public ResponseEntity<?> getAllThemes() {
-        return themesService.getAllThemes();
+    public List<ThemeDto> getAllThemes() {
+        List<ThemeDto> themeDtos = themesService.getAllThemes();
+        if (themeDtos == null) {
+            return null;
+        }
+
+        return themeDtos;
     }
 
-    public ResponseEntity<?> getThemesById(Long articleId) {
-        return themesService.getThemeById(articleId);
-    }
+    public ThemeDto getThemesById(Long articleId) {
+        ThemeDto themeDto = themesService.getThemeById(articleId);
 
-    /*
-     * public ResponseEntity<?> postNewTheme(ThemeRequestDto themeRequestDto) {
-     * return themesService.postNewTheme(themeRequestDto);
-     * }
-     */
+        if (themeDto == null) {
+            return null;
+        }
+
+        return themeDto;
+    }
 
 }

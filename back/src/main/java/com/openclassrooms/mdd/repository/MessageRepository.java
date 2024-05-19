@@ -1,6 +1,5 @@
 package com.openclassrooms.mdd.repository;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +9,5 @@ import com.openclassrooms.mdd.models.MessageEntity;
 
 @Repository
 public interface MessageRepository extends JpaRepository<MessageEntity, Integer> {
-    List<MessageEntity> findAllByMessageId(Integer idArticle);
+    List<MessageEntity> findByArticle_ArticleId(Integer idArticle);
 }

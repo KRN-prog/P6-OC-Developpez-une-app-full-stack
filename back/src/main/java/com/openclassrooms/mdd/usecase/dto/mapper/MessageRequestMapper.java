@@ -6,11 +6,11 @@ import com.openclassrooms.mdd.usecase.dto.request.MessageRequestDto;
 public class MessageRequestMapper {
 
     public static MessageEntity maptoMessageEntity(MessageRequestDto messageRequestDto) {
-        return new MessageEntity(
-                null,
-                messageRequestDto.getMessage(),
-                messageRequestDto.getIdArticle(),
-                messageRequestDto.getIdUser());
+        return MessageEntity.builder()
+                .message(messageRequestDto.getMessage())
+                .article(messageRequestDto.getArticleId())
+                .user(messageRequestDto.getUserId())
+                .build();
     }
 
 }

@@ -1,11 +1,12 @@
 package com.openclassrooms.mdd.usecase;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mdd.service.ArticleService;
 import com.openclassrooms.mdd.usecase.dto.ArticleDto;
-import com.openclassrooms.mdd.usecase.dto.UserDto;
 import com.openclassrooms.mdd.usecase.dto.request.ArticleRequestDto;
 
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,12 @@ public class ArticleUseCase {
 
     private final ArticleService articleService;
 
-    public ResponseEntity<?> getAllArticles() {
-        return articleService.getAllArticles();
+    public List<ArticleDto> getAllArticles() {
+        List<ArticleDto> articleDtos = articleService.getAllArticles();
+        if (articleDtos == null) {
+            return null;
+        }
+        return articleDtos;
     }
 
     public ArticleDto getArticleById(Integer articleId) {

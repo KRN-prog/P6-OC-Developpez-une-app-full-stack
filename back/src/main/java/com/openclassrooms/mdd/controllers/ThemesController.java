@@ -1,15 +1,17 @@
 package com.openclassrooms.mdd.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mdd.usecase.ThemesUseCase;
-import com.openclassrooms.mdd.usecase.dto.request.ThemeRequestDto;
+import com.openclassrooms.mdd.usecase.dto.ThemeDto;
 
 @RestController
 @RequestMapping("/mdd")
@@ -23,20 +25,28 @@ public class ThemesController {
 
     @GetMapping("/themes")
     public ResponseEntity<?> getAllThemes() {
-        return this.themesUseCase.getAllThemes();
+        List<ThemeDto> themeDtos = this.themesUseCase.getAllThemes();
+
+        if (themeDtos == null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Article error: Cannot retrieve the good article.");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        return ResponseEntity.ok(themeDtos);
     }
 
     @GetMapping("/theme/{id}")
     public ResponseEntity<?> getThemeById(@Valid @PathVariable Long id) {
-        return this.themesUseCase.getThemesById(id);
-    }
+        ThemeDto themeDto = this.themesUseCase.getThemesById(id);
 
-    /*
-     * @PostMapping("/theme")
-     * public ResponseEntity<?> postNewTheme(@Valid @RequestBody ThemeRequestDto
-     * themeRequestDto) {
-     * return this.themesUseCase.postNewTheme(themeRequestDto);
-     * }
-     */
+        if (themeDto == null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Article error: Cannot retrieve the good article.");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        return ResponseEntity.ok(themeDto);
+    }
 
 }
