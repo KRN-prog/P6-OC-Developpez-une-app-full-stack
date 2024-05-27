@@ -5,15 +5,15 @@
             <h2 class="article__h2">Créer un nouvel article</h2>
             <form (ngSubmit)="registerTheme()" class="article__form">
                 <div class="article__form__container">
-                    <select name="theme" class="inputForm" [(ngModel)]="themeData.theme" required>
-                        <option *ngFor="let theme of themes" value="{{ theme.theme }}">{{ theme.title }}</option>
+                    <select name="theme" class="inputForm" [(ngModel)]="article.theme.id" required>
+                        <option *ngFor="let theme of themes" value="{{ theme.id }}">{{ theme.title }}</option>
                     </select>
                 </div>
                 <div class="article__form__container">
-                    <input type="text" name="titre" placeholder="Titre de l'article" class="inputForm" [(ngModel)]="themeData.titre" required/>
+                    <input type="text" name="titre" placeholder="Titre de l'article" class="inputForm" [(ngModel)]="article.titre" required/>
                 </div>
                 <div class="article__form__container">
-                    <textarea name="content" class="article__form__container__textarea" cols="30" rows="10" placeholder="Contenu de l'article" [(ngModel)]="themeData.content"></textarea>
+                    <textarea name="content" class="article__form__container__textarea" cols="30" rows="10" placeholder="Contenu de l'article" [(ngModel)]="article.content"></textarea>
                 </div>
                 <div class="article__form__container--button">
                     <app-button [button]="create"></app-button>

@@ -11,6 +11,8 @@ export class ArticlesService {
   private article = 'http://localhost:8080/mdd/article/';
   private postNewArticle = 'http://localhost:8080/mdd/article';
 
+  private theme = 'http://localhost:8080/mdd/theme/';
+
   constructor(private http: HttpClient) {}
 
   headers: HttpHeaders = new HttpHeaders({
@@ -22,14 +24,14 @@ export class ArticlesService {
   }
 
   getArticle(idArticle: any): Observable<any> {
-    return this.http.get<any>(this.article+idArticle);
+    return this.http.get<any>(this.article + idArticle);
   }
 
   updateArticle(articleReqest: any, idArticle: any): Observable<any> {
-    return this.http.get<any>(this.article, articleReqest)
+    return this.http.get<any>(this.article, articleReqest);
   }
 
-  postArticle(articleReqest: any): Observable<any> {
-    return this.http.post<any>(this.postNewArticle, articleReqest)
+  postArticle(themeData: any): Observable<any> {
+    return this.http.post<any>(this.postNewArticle, themeData);
   }
 }

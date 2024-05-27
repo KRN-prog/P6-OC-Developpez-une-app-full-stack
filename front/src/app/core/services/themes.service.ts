@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class ThemesService {
   private themes = 'http://localhost:8080/mdd/themes';
   private theme = 'http://localhost:8080/mdd/theme/';
-  private postNewTheme = 'http://localhost:8080/mdd/theme';
+  private subOrDeleteToTheme = 'http://localhost:8080/mdd/theme/sub';
+  private getSubToTheme = 'http://localhost:8080/mdd/theme/sub/';
 
   constructor(private http: HttpClient) {}
 
@@ -17,10 +18,24 @@ export class ThemesService {
   }
 
   getThemeById(idTheme: any): Observable<any> {
-    return this.http.get<any>(this.theme+idTheme, idTheme);
+    return this.http.get<any>(this.theme + idTheme, idTheme);
   }
 
-  postTheme(themeRequest: any): Observable<any> {
-    return this.http.post<any>(this.postNewTheme, themeRequest);
+  subscribeToTheme(themeSub: any): Observable<any> {
+    return this.http.post<any>(this.subOrDeleteToTheme, themeSub);
+  }
+
+  deleteSubToTheme(deleteThemeSub: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.delete<any>(this.subOrDeleteToTheme, {
+      headers,
+      body: deleteThemeSub,
+    });
+  }
+
+  getAllSubedTheme(idThemeSub: any): Observable<any> {
+    return this.http.get<any>(this.getSubToTheme + idThemeSub);
   }
 }

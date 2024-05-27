@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ThemesService } from 'src/app/core/services/themes.service';
 
@@ -8,28 +9,46 @@ import { ThemesService } from 'src/app/core/services/themes.service';
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.scss'],
 })
-export class ProfilComponent implements OnInit {
+export class ProfilComponent implements AfterViewInit {
   public save: string = 'Sauvegarder';
   user: any = null;
-  themeList: any = [];
+  themes!: any;
+  subedThemes!: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private themesService: ThemesService) {}
+  requestSent: boolean = false;
+  formReturn!: string;
 
-  ngOnInit(): void {
-    let themeStringArr = this.getItem("user").themes
-    let arrParse = JSON.parse(themeStringArr);
-    if (arrParse.length >= 1) {
-      this.getArticleSub(); 
-    }
+  updateUserData = {
+    newUsername: '',
+    newEmail: '',
+  };
+
+  UserRecreation = {
+    id: '',
+    username: '',
+    email: '',
+    password: '',
+  };
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private themeService: ThemesService
+  ) {}
+
+  ngAfterViewInit() {
+    this.getAllThemes();
+    this.getThemeSubscribed();
   }
 
   getThemeById(): void {
-    this.authService.getUserById(this.route.snapshot.paramMap.get('id')).subscribe(
-      (response) => {
+    this.authService
+      .getUserById(this.route.snapshot.paramMap.get('id'))
+      .subscribe((response) => {
         console.log(response);
         this.user = response;
-      }
-    );
+      });
   }
 
   getItem(key: string): any {
@@ -37,26 +56,57 @@ export class ProfilComponent implements OnInit {
     return item ? JSON.parse(item) : null;
   }
 
+  setItem(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
   removeItem(key: string): void {
     localStorage.removeItem(key);
   }
 
-  getArticleSub(): void {
-    let themeStringArr = this.getItem("user").themes
-    let arrParse = JSON.parse(themeStringArr);
-    for (let i = 0; i < arrParse.length; i++) {
-      this.themesService.getThemeById(arrParse[i]).subscribe(
+  updateUser(): void {
+    this.authService
+      .updateUser(this.getItem('user').id, this.updateUserData)
+      .subscribe(
         (response) => {
-          console.log(response);
-          this.themeList.push(response);
+          this.UserRecreation.id = this.getItem('user').id;
+          this.UserRecreation.username = this.updateUserData.newUsername;
+          this.UserRecreation.email = this.updateUserData.newEmail;
+          this.UserRecreation.password = this.getItem('user').password;
+          this.setItem('user', this.UserRecreation);
+
+          this.requestSent = true;
+          this.formReturn = 'Your profil was successfully updated';
+        },
+        (error) => {
+          this.requestSent = true;
+          this.formReturn = 'Something was wrong will updating your profil';
         }
       );
-    }
   }
 
-  logOut(){
-    this.removeItem("user");
-    this.removeItem("userToken");
+  getAllThemes() {
+    this.themeService
+      .getAllThemes()
+      .pipe(take(1))
+      .subscribe((response) => {
+        console.log(response);
+        this.themes = response;
+      });
+  }
+
+  getThemeSubscribed() {
+    this.themeService
+      .getAllSubedTheme(this.getItem('user').id)
+      .subscribe((response) => {
+        console.log(response);
+        this.subedThemes = response;
+      });
+  }
+
+  logOut() {
+    this.removeItem('user');
+    this.removeItem('userToken');
     this.router.navigate(['/']);
   }
 }

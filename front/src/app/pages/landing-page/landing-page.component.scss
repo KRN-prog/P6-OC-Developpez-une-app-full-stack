@@ -18,3 +18,45 @@
         justify-content: space-around;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .section{
+        &__landing{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: normal;
+        }
+    }
+    .article{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        &__img{
+            width: 225px;
+            height: 130px;
+            margin-top: 25%;
+        }
+        &__buttonConnexionLoginSection{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            align-content: center;
+            display: flex;
+            text-align: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            & > app-button {
+                flex-basis: 100%;
+            }
+        }
+    }
+}

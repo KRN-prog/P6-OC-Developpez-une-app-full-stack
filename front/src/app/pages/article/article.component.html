@@ -14,9 +14,9 @@
     <section class="section section--comments">
         <article>
             <h2>Commentaires</h2>
-            <div class="CommentairesContainer">
-                <div>username</div>
-                <div>Contenu du commentaire</div>
+            <div class="CommentairesContainer" *ngFor="let message of messages">
+                <div class="CommentairesContainer__username">{{ message.id_user.username }}</div>
+                <div class="CommentairesContainer__message">{{ message.message }}</div>
             </div>
             <form (ngSubmit)="postMessage()" class="form">
                 <input type="text" name="message" placeholder="Ecrivez votre message" class="form__input" [(ngModel)]="messageRequest.message" />

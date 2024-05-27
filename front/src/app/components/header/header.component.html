@@ -1,6 +1,9 @@
 <header class="header">
     <nav class="nav">
         <div><img src="../../../assets/png/logo.png" alt="Mdd logo" class="logo" (click)="gotToHome()" /></div>
+        <span class="nav__navWrap__select iconMenu">
+            <img src="../../../assets/png/menu.png" alt="Menu" />
+        </span>
         <div *ngIf="getItem('user')" class="nav__navWrap">
             <span (click)="goToArticles()" [ngClass]="{'articles-class': isArticlesRoute()}" class="nav__navWrap__select">Articles</span>
             <span (click)="goToThemes()" [ngClass]="{'themes-class': isThemesRoute()}" class="nav__navWrap__select">Thèmes</span>

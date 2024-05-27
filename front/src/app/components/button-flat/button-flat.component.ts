@@ -5,13 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  selector: 'app-button-flat',
+  templateUrl: './button-flat.component.html',
+  styleUrls: ['./button-flat.component.scss'],
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule],
 })
-export class ButtonComponent {
+export class ButtonFlatComponent {
   @Input() buttonType!: string;
   @Input() button!: string;
 }

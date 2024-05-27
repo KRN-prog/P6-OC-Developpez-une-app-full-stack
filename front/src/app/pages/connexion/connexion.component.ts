@@ -1,7 +1,5 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { empty } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({

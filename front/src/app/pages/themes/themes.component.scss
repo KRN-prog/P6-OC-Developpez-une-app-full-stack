@@ -12,3 +12,9 @@
     flex-basis: 45%;
     margin: 15px 0;
 }
+
+@media screen and (max-width: 425px) {
+    .articleSceme{
+        flex-basis: 100%;
+    }
+}

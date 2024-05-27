@@ -10,8 +10,7 @@ export class AuthService {
   private loginUrl = 'http://localhost:8080/mdd/auth/login';
   private authMe = 'http://localhost:8080/mdd/auth/me';
   private user = 'http://localhost:8080/mdd/user/';
-  private updateUserPath = 'http://localhost:8080/mdd/user';
-  private updateDeleteUserPath = 'http://localhost:8080/mdd/user/delete';
+  private updateUserPath = 'http://localhost:8080/mdd/user/';
 
   constructor(private http: HttpClient) {}
 
@@ -34,14 +33,10 @@ export class AuthService {
   }
 
   getUserById(idUser: any): Observable<any> {
-    return this.http.get<any>(this.user+idUser);
+    return this.http.get<any>(this.user + idUser);
   }
 
-  updateUser(updateTheme: any): Observable<any> {
-    return this.http.put<any>(this.updateUserPath, updateTheme);
-  }
-
-  updateDeleteUser(updateTheme: any): Observable<any> {
-    return this.http.put<any>(this.updateDeleteUserPath, updateTheme);
+  updateUser(userId: any, updateUserData: any): Observable<any> {
+    return this.http.put<any>(this.updateUserPath + userId, updateUserData);
   }
 }

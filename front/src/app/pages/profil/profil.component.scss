@@ -1,9 +1,22 @@
+.main{
+    width: 90%;
+    margin: auto;
+}
+
 .section{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    &__heading{
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 29.05px;
+        font-family: Roboto, sans-serif;
+        letter-spacing: .0125em;
+        margin: 0 0 16px;
+    }
 }
 .article{
     &__form{
@@ -38,4 +51,27 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    border-top: 1px solid;
+    margin-top: 35px;
+    padding-top: 15px;
+    &__heading{
+        flex-basis: 100%;
+        text-align: center;
+    }
+}
+.articleSceme{
+    flex-basis: 45%;
+}
+
+@media screen and (max-width: 425px) {
+    .articleSchemeContainer{
+        margin-top: 10px;
+        &__heading{
+            display: none;
+        }
+    }
+    .articleSceme{
+        flex-basis: 100%;
+        margin-bottom: 15px;
+    }
 }

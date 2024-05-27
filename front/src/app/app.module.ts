@@ -20,6 +20,10 @@ import { ThemeComponent } from './pages/theme/theme.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { ButtonFlatComponent } from './components/button-flat/button-flat.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +37,23 @@ import { HttpClientModule } from '@angular/common/http';
     ArticleComponent,
     CreateArticleComponent,
     HeaderComponent,
-    ButtonComponent,
     InputComponent,
     ArticleSchemeComponent,
     ThemeSchemeComponent,
     ThemeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [AuthService],
   bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ButtonComponent,
+    MatButtonModule,
+    CommonModule,
+    ButtonFlatComponent,
+  ],
 })
 export class AppModule {}

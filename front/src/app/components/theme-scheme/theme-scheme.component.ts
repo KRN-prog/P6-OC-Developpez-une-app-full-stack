@@ -9,8 +9,9 @@ import { ThemesService } from 'src/app/core/services/themes.service';
 })
 export class ThemeSchemeComponent {
   @Input() forTheme!: any;
+  @Input() subedTheme!: any;
   subscribeToTheme: string = "S'abonner";
-  unsubscribeToTheme: string = "Se désabonner";
+  unsubscribeToTheme: string = 'Se désabonner';
 
   UserRecreation = {
     id: '',
@@ -18,14 +19,29 @@ export class ThemeSchemeComponent {
     email: '',
     password: '',
     themes: '',
-  }
+  };
 
-  UpdateTheme = {
-    id_article: '',
-    id_user: '',
-  }
+  sub = {
+    user: {
+      userId: 1,
+      username: '',
+      email: '',
+      password: '',
+    },
+    theme: {
+      id: 1,
+      theme: '',
+      title: '',
+      contenu: '',
+    },
+  };
 
-  constructor(private authService: AuthService) {}
+  unsub = {
+    themeId: 1,
+    userId: 1,
+  };
+
+  constructor(private themeService: ThemesService) {}
 
   getItem(key: string): any {
     const item = localStorage.getItem(key);
@@ -36,61 +52,39 @@ export class ThemeSchemeComponent {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  containsSimilarId(theme: any): any {
-    if (this.getItem("user").themes) {
-      let themeStringArr = this.getItem("user").themes
-      let arrParse =  JSON.parse(themeStringArr);
-
-      //return arrParse.some((item: { id: any; }) => themeId.includes(item.id));
-      return arrParse.some((themeId: { id: any; }) => themeId === theme.id); 
+  containsSimilarId(forTheme: any): any {
+    if (this.subedTheme) {
+      const matchingTheme = this.subedTheme.find(
+        (theme: { theme: { id: any }; user: { userId: any } }) =>
+          theme.theme?.id === forTheme.id &&
+          theme.user?.userId === this.getItem('user').id
+      );
+      if (matchingTheme) {
+        return true;
+      }
     }
   }
 
-  subscribeTheme(theme: any): void {
-    let themeStringArr = this.getItem("user").themes
-    let arrParse = JSON.parse(themeStringArr);
-    arrParse.push(theme.id);
-    let arrParsed = JSON.stringify(arrParse);
+  subscribeTheme(forTheme: any): void {
+    this.sub.user.userId = this.getItem('user').id;
+    this.sub.user.email = this.getItem('user').email;
+    this.sub.user.username = this.getItem('user').username;
+    this.sub.user.password = this.getItem('user').password;
+    this.sub.theme = forTheme;
 
-    this.UserRecreation.id = this.getItem("user").id;
-    this.UserRecreation.username = this.getItem("user").username;
-    this.UserRecreation.email = this.getItem("user").email;
-    this.UserRecreation.password = this.getItem("user").password;
-    this.UserRecreation.themes = arrParsed;
-    this.setItem("user", this.UserRecreation)
-    console.log(this.getItem("user"))
-
-    this.UpdateTheme.id_article = theme.id;
-    this.UpdateTheme.id_user = this.getItem("user").id;
-
-    this.authService.updateUser(this.UpdateTheme).subscribe(
-      (response) => {
-        console.log(response);
-      }
-    );
+    console.log(this.sub);
+    this.themeService.subscribeToTheme(this.sub).subscribe((response) => {
+      window.location.reload();
+    });
   }
 
-  unsubscribeTheme(theme: any): void {
-    let themeStringArr = this.getItem("user").themes
-    let arrParse = JSON.parse(themeStringArr);
-    arrParse = arrParse.filter((item: any) => item !== theme.id);
-    let arrParsed = JSON.stringify(arrParse);
+  unsubscribeTheme(forTheme: any): void {
+    this.unsub.themeId = forTheme.id;
+    this.unsub.userId = this.getItem('user').id;
 
-    this.UserRecreation.id = this.getItem("user").id;
-    this.UserRecreation.username = this.getItem("user").username;
-    this.UserRecreation.email = this.getItem("user").email;
-    this.UserRecreation.password = this.getItem("user").password;
-    this.UserRecreation.themes = arrParsed;
-    this.setItem("user", this.UserRecreation)
-    console.log(this.getItem("user"))
-
-    this.UpdateTheme.id_article = theme.id;
-    this.UpdateTheme.id_user = this.getItem("user").id;
-
-    this.authService.updateUser(this.UpdateTheme).subscribe(
-      (response) => {
-        console.log(response);
-      }
-    );
+    console.log(this.unsub);
+    this.themeService.deleteSubToTheme(this.unsub).subscribe((response) => {
+      window.location.reload();
+    });
   }
 }

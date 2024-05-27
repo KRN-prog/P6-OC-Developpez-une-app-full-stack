@@ -14,12 +14,17 @@ export class CreateArticleComponent implements OnInit {
   formFailure: any = false;
   formSuccess: any = false;
 
-  themeData = {
+  article = {
     titre: '',
     date: '',
     auteur: '',
     content: '',
-    theme: '',
+    theme: {
+      id: 1,
+      theme: '',
+      title: '',
+      contenu: '',
+    },
   };
 
   constructor(
@@ -51,17 +56,21 @@ export class CreateArticleComponent implements OnInit {
     var year = date.toLocaleString('default', { year: 'numeric' });
     var month = date.toLocaleString('default', { month: '2-digit' });
     var day = date.toLocaleString('default', { day: '2-digit' });
-    var formattedDate = year + '-' + month + '-' + day;
+    var formattedDate = day + '/' + month + '/' + year;
 
-    this.themeData.auteur = this.getItem('user').username;
-    this.themeData.date = formattedDate;
-    this.articleService.postArticle(this.themeData).subscribe(
+    this.article.titre = this.article.titre;
+    this.article.content = this.article.content;
+    this.article.auteur = this.getItem('user').username;
+    this.article.date = formattedDate;
+
+    console.log(this.article);
+    this.articleService.postArticle(this.article).subscribe(
       (response) => {
         console.log('success');
         this.formSuccess = true;
       },
       (error) => {
-        console.log('error');
+        console.log(error);
         this.formFailure = true;
       }
     );

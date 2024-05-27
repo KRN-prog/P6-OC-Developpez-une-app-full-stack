@@ -31,3 +31,19 @@
 
     }
 }
+
+.CommentairesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    &__username{
+        flex-basis: 15%;
+        text-align: center;
+    }
+    &__message{
+        flex-basis: 80%;
+        background: #EEEEEE;
+        padding: 15px 15px 35px 15px;
+        border-radius: 16px;
+    }
+}
