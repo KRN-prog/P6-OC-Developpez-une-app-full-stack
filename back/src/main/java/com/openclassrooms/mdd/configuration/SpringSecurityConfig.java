@@ -34,7 +34,8 @@ public class SpringSecurityConfig {
                                 "/mdd/article/{id}", "/mdd/article", "/mdd/post/message", "/mdd/get/message",
                                 "/mdd/get/message/{id}", "/mdd/user/{id}",
                                 "/mdd/user", "/mdd/user/delete", "/mdd/theme/{id}", "/mdd/theme/{id}", "/mdd/theme",
-                                "/mdd/themes", "/mdd/user/{id}", "/mdd/articles")
+                                "/mdd/themes", "/mdd/user/{id}", "/mdd/articles", "/mdd/theme/sub",
+                                "/mdd/theme/sub/{id}")
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

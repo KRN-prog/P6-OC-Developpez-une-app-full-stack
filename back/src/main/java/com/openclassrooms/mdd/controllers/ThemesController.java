@@ -5,13 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mdd.models.ThemeSubEntity;
 import com.openclassrooms.mdd.usecase.ThemesUseCase;
 import com.openclassrooms.mdd.usecase.dto.ThemeDto;
+import com.openclassrooms.mdd.usecase.dto.ThemeSubDto;
+import com.openclassrooms.mdd.usecase.dto.request.DeleteThemeSubDto;
+import com.openclassrooms.mdd.usecase.dto.request.ThemeSubRequestDto;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/mdd")
@@ -47,6 +55,35 @@ public class ThemesController {
         }
 
         return ResponseEntity.ok(themeDto);
+    }
+
+    @PostMapping("/theme/sub")
+    public ThemeSubEntity postNewSub(@Valid @RequestBody ThemeSubRequestDto themeSubRequestDto) {
+        return themesUseCase.postNewSub(themeSubRequestDto);
+    }
+
+    @GetMapping("/theme/sub/{id}")
+    public ResponseEntity<?> getThemesByUser(@PathVariable("id") Integer userId) {
+
+        List<ThemeSubDto> themeDtos = themesUseCase.getThemesSub(userId);
+        if (themeDtos == null) {
+            return ResponseEntity.badRequest().body("null");
+        }
+        return ResponseEntity.ok(themeDtos);
+    }
+
+    @DeleteMapping("/theme/sub")
+    public ResponseEntity<?> deleteThemesByUser(@RequestBody DeleteThemeSubDto deleteThemeSubDto) {
+
+        boolean themeDtos = themesUseCase.deleteThemesSub(deleteThemeSubDto);
+        if (themeDtos == false) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Impossible de supprimer l'abonnement");
+            return ResponseEntity.badRequest().body(response);
+        }
+        Map<String, String> response = new HashMap<>();
+        response.put("response", "Abonnement supprimer avec succès");
+        return ResponseEntity.ok(response);
     }
 
 }

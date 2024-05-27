@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mdd.models.ThemeSubEntity;
 import com.openclassrooms.mdd.service.ThemesService;
 import com.openclassrooms.mdd.usecase.dto.ThemeDto;
+import com.openclassrooms.mdd.usecase.dto.ThemeSubDto;
+import com.openclassrooms.mdd.usecase.dto.request.DeleteThemeSubDto;
+import com.openclassrooms.mdd.usecase.dto.request.ThemeSubRequestDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,6 +36,18 @@ public class ThemesUseCase {
         }
 
         return themeDto;
+    }
+
+    public ThemeSubEntity postNewSub(ThemeSubRequestDto themeSubRequestDto) {
+        return themesService.postNewSub(themeSubRequestDto);
+    }
+
+    public List<ThemeSubDto> getThemesSub(Integer userId) {
+        return themesService.getThemesSub(userId);
+    }
+
+    public boolean deleteThemesSub(DeleteThemeSubDto deleteThemeSubDto) {
+        return themesService.deleteThemesSub(deleteThemeSubDto);
     }
 
 }
