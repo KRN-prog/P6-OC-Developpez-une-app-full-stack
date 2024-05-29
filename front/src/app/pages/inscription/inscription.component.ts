@@ -32,6 +32,10 @@ export class InscriptionComponent implements OnInit {
     return item ? JSON.parse(item) : null;
   }
 
+  goBack() {
+    history.back();
+  }
+
   registerUser(): void {
     this.authService.registerUser(this.registerData).subscribe(
       (response) => {

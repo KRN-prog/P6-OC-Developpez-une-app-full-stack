@@ -1,27 +1,49 @@
-<app-header></app-header>
-<main>
-    <section class="section">
-        <article *ngIf="article">
-            <h2 class="article__h2">{{ article.titre }}</h2>
-            <div class="article__dateAuteurContainer">
-                <span class="article__dateAuteurContainer__date">{{ article.date }}</span><span class="article__dateAuteurContainer__auteur">{{ article.auteur }}</span><span>{{ article.theme.title }}</span>
-            </div>
-            <div class="article__contentContainer">
-                <span>{{ article.content }}</span>
-            </div>
-        </article>
-    </section>
-    <section class="section section--comments">
-        <article>
-            <h2>Commentaires</h2>
-            <div class="CommentairesContainer" *ngFor="let message of messages">
-                <div class="CommentairesContainer__username">{{ message.id_user.username }}</div>
-                <div class="CommentairesContainer__message">{{ message.message }}</div>
-            </div>
-            <form (ngSubmit)="postMessage()" class="form">
-                <input type="text" name="message" placeholder="Ecrivez votre message" class="form__input" [(ngModel)]="messageRequest.message" />
-                <button type="submit" class="form__send">send</button>
-            </form>
-        </article>
-    </section>
-</main>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" class="sidenav" position="end">
+        <mat-nav-list>
+            <mat-list-item (click)="goToArticles()">Articles</mat-list-item>
+            <mat-list-item (click)="goToThemes()">Thèmes</mat-list-item>
+            <mat-list-item (click)="goToProfil()" class="profilRedirection">
+                <span class="nav__navWrap__select iconWrap iconContainer">
+                    <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
+                </span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+        <main class="main">
+            <section class="section">
+                <article *ngIf="article">
+                    <div class="headeContainer">
+                        <span class="backImg backImg--article" (click)="goBack()">
+                            <img src="../../../assets/png/Arrow.png" alt="Back arrow">
+                        </span>
+                        <h2 class="article__h2">{{ article.titre }}</h2>
+                    </div>
+                    <div class="article__dateAuteurContainer">
+                        <span class="article__dateAuteurContainer__date">{{ article.date }}</span><span class="article__dateAuteurContainer__auteur">{{ article.auteur }}</span><span>{{ article.theme.title }}</span>
+                    </div>
+                    <div class="article__contentContainer">
+                        <span>{{ article.content }}</span>
+                    </div>
+                </article>
+            </section>
+            <section class="section section--comments">
+                <article>
+                    <h2>Commentaires</h2>
+                    <div class="CommentairesContainer" *ngFor="let message of messages">
+                        <div class="CommentairesContainer__username">{{ message.id_user.username }}</div>
+                        <div class="CommentairesContainer__message">{{ message.message }}</div>
+                    </div>
+                    <form (ngSubmit)="postMessage()" class="form">
+                        <input type="text" name="message" placeholder="Ecrivez votre message" class="form__input" [(ngModel)]="messageRequest.message" />
+                        <button type="submit" class="form__send">
+                            <img src="../../../assets/png/icon _send_.png" alt="Send" class="form__send__img">
+                        </button>
+                    </form>
+                </article>
+            </section>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

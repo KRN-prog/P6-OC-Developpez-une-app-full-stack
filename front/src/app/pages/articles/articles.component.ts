@@ -14,15 +14,19 @@ export class ArticlesComponent implements OnInit {
   articles: any = null;
 
   headers: HttpHeaders = new HttpHeaders({
-    'Authorization': `Bearer ${this.getItem('userToken')}`
+    Authorization: `Bearer ${this.getItem('userToken')}`,
   });
 
-  constructor(private router: Router, private articlesService: ArticlesService, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private articlesService: ArticlesService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     if (this.getItem('userToken')) {
-        this.authUser();
-        this.getAllArticles();
+      this.authUser();
+      this.getAllArticles();
     } else {
       this.router.navigate(['/']);
     }
@@ -33,7 +37,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   goToArticle(idArticle: any): void {
-    this.router.navigate(['/article/'+idArticle]);
+    this.router.navigate(['/article/' + idArticle]);
   }
 
   setItem(key: string, value: any): void {
@@ -50,27 +54,44 @@ export class ArticlesComponent implements OnInit {
   }
 
   getAllArticles(): void {
-    this.articlesService.getAllArticles().subscribe(
-      (response) => {
-        console.log(response);
-        this.articles = response;
-      }
-    );
+    this.articlesService.getAllArticles().subscribe((response) => {
+      console.log(response);
+      this.articles = response;
+    });
   }
 
   authUser(): void {
-    console.log(this.headers)
+    console.log(this.headers);
     this.authService.authUser(this.headers).subscribe(
       (response) => {
-        if (this.getItem("user")) {
-          this.removeItem("user");
+        if (this.getItem('user')) {
+          this.removeItem('user');
         }
         localStorage.setItem('user', JSON.stringify(response));
         console.log(response);
       },
-      (error) => {
-      }
+      (error) => {}
     );
+  }
+
+  goToProfil() {
+    this.router.navigate(['/profil']);
+  }
+
+  goToThemes() {
+    this.router.navigate(['/themes']);
+  }
+
+  goToArticles() {
+    this.router.navigate(['/articles']);
+  }
+
+  isArticlesRoute(): boolean {
+    return this.router.url.includes('/articles');
+  }
+
+  isThemesRoute(): boolean {
+    return this.router.url.includes('/themes');
   }
 
   public mesDonnees: any = this.getItem('userToken'); //JSON.parse(localStorage.getItem('mesDonnees'));

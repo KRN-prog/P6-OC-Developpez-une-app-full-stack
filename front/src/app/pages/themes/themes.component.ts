@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { ThemesService } from 'src/app/core/services/themes.service';
 
@@ -11,11 +12,23 @@ export class ThemesComponent implements OnInit {
   themes: any = null;
   subedThemes: any = null;
 
-  constructor(private themeService: ThemesService) {}
+  constructor(private router: Router, private themeService: ThemesService) {}
 
   ngOnInit(): void {
     this.getAllThemes();
     this.getThemeSubscribed();
+  }
+
+  goToProfil() {
+    this.router.navigate(['/profil']);
+  }
+
+  goToThemes() {
+    this.router.navigate(['/themes']);
+  }
+
+  goToArticles() {
+    this.router.navigate(['/articles']);
   }
 
   getItem(key: string): any {

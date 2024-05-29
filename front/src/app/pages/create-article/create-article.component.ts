@@ -37,6 +37,22 @@ export class CreateArticleComponent implements OnInit {
     this.getAllThemes();
   }
 
+  goBack() {
+    history.back();
+  }
+
+  goToProfil() {
+    this.router.navigate(['/profil']);
+  }
+
+  goToThemes() {
+    this.router.navigate(['/themes']);
+  }
+
+  goToArticles() {
+    this.router.navigate(['/articles']);
+  }
+
   getAllThemes(): void {
     this.themesService.getAllThemes().subscribe((response) => {
       console.log(response);

@@ -1,8 +1,23 @@
-<app-header></app-header>
-<main>
-    <div class="sectionScheme">
-        <section class="articleSchemeContainer">
-            <app-theme-scheme *ngFor="let theme of themes" class="articleSceme" [forTheme]="theme" [subedTheme]="subedThemes"></app-theme-scheme>
-        </section>
-    </div>
-</main>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" class="sidenav" position="end">
+        <mat-nav-list>
+            <mat-list-item (click)="goToArticles()">Articles</mat-list-item>
+            <mat-list-item (click)="goToThemes()">Thèmes</mat-list-item>
+            <mat-list-item (click)="goToProfil()" class="profilRedirection">
+                <span class="nav__navWrap__select iconWrap iconContainer">
+                    <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
+                </span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+        <main>
+            <div class="sectionScheme">
+                <section class="articleSchemeContainer">
+                    <app-theme-scheme *ngFor="let theme of themes" class="articleSceme" [forTheme]="theme" [subedTheme]="subedThemes"></app-theme-scheme>
+                </section>
+            </div>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,15 +1,20 @@
-<header class="header">
-    <nav class="nav">
-        <div><img src="../../../assets/png/logo.png" alt="Mdd logo" class="logo" (click)="gotToHome()" /></div>
-        <span class="nav__navWrap__select iconMenu">
-            <img src="../../../assets/png/menu.png" alt="Menu" />
-        </span>
-        <div *ngIf="getItem('user')" class="nav__navWrap">
-            <span (click)="goToArticles()" [ngClass]="{'articles-class': isArticlesRoute()}" class="nav__navWrap__select">Articles</span>
-            <span (click)="goToThemes()" [ngClass]="{'themes-class': isThemesRoute()}" class="nav__navWrap__select">Thèmes</span>
-            <span (click)="goToProfil()" class="nav__navWrap__select iconWrap">
-                <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
-            </span>
-        </div>
-    </nav>
+<header [ngClass]="{'header--connection': getItem('user') == null}" class="header">
+  <nav class="nav">
+    <div>
+      <img src="../../../assets/png/logo.png" alt="Mdd logo" [ngClass]="{'logo--connection': getItem('user') == null}" class="logo" (click)="gotToHome()" />
+    </div>
+    <span *ngIf="getItem('user')" class="nav__navWrap__select nav__navWrap__select--menuBurger">
+      <button mat-icon-button (click)="toggleSidenav.emit()">
+        <img src="../../../assets/png/menu.png" alt="Menu" class="iconBurger"/>
+      </button>
+    </span>
+    <div *ngIf="getItem('user')" class="nav__navWrap nav__navWrap--menuDesktop">
+      <span (click)="goToArticles()" [ngClass]="{'articles-class': isArticlesRoute()}" class="nav__navWrap__select">Articles</span>
+      <span (click)="goToThemes()" [ngClass]="{'themes-class': isThemesRoute()}" class="nav__navWrap__select">Thèmes</span>
+      <span (click)="goToProfil()" class="nav__navWrap__select iconWrap">
+        <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
+      </span>
+    </div>
+  </nav>
 </header>
+  

@@ -42,6 +42,18 @@ export class ProfilComponent implements AfterViewInit {
     this.getThemeSubscribed();
   }
 
+  goToProfil() {
+    this.router.navigate(['/profil']);
+  }
+
+  goToThemes() {
+    this.router.navigate(['/themes']);
+  }
+
+  goToArticles() {
+    this.router.navigate(['/articles']);
+  }
+
   getThemeById(): void {
     this.authService
       .getUserById(this.route.snapshot.paramMap.get('id'))

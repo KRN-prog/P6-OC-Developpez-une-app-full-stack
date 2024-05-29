@@ -1,24 +1,44 @@
-<app-header></app-header>
-<main>
-    <section>
-        <article class="article">
-            <h2 class="article__h2">Créer un nouvel article</h2>
-            <form (ngSubmit)="registerTheme()" class="article__form">
-                <div class="article__form__container">
-                    <select name="theme" class="inputForm" [(ngModel)]="article.theme.id" required>
-                        <option *ngFor="let theme of themes" value="{{ theme.id }}">{{ theme.title }}</option>
-                    </select>
-                </div>
-                <div class="article__form__container">
-                    <input type="text" name="titre" placeholder="Titre de l'article" class="inputForm" [(ngModel)]="article.titre" required/>
-                </div>
-                <div class="article__form__container">
-                    <textarea name="content" class="article__form__container__textarea" cols="30" rows="10" placeholder="Contenu de l'article" [(ngModel)]="article.content"></textarea>
-                </div>
-                <div class="article__form__container--button">
-                    <app-button [button]="create"></app-button>
-                </div>
-            </form>
-        </article>
-    </section>
-</main>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" class="sidenav" position="end">
+        <mat-nav-list>
+            <mat-list-item (click)="goToArticles()">Articles</mat-list-item>
+            <mat-list-item (click)="goToThemes()">Thèmes</mat-list-item>
+            <mat-list-item (click)="goToProfil()" class="profilRedirection">
+                <span class="nav__navWrap__select iconWrap iconContainer">
+                    <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
+                </span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+        <main class="main">
+            <section>
+                <article class="article">
+                    <div>
+                        <span class="backImg backImg--createArticle" (click)="goBack()">
+                            <img src="../../../assets/png/Arrow.png" alt="Back arrow">
+                        </span>
+                        <h2 class="article__h2">Créer un nouvel article</h2>
+                    </div>
+                    <form (ngSubmit)="registerTheme()" class="article__form">
+                        <div class="article__form__container">
+                            <select name="theme" class="inputForm" [(ngModel)]="article.theme.id" required>
+                                <option *ngFor="let theme of themes" value="{{ theme.id }}">{{ theme.title }}</option>
+                            </select>
+                        </div>
+                        <div class="article__form__container">
+                            <input type="text" name="titre" placeholder="Titre de l'article" class="inputForm" [(ngModel)]="article.titre" required/>
+                        </div>
+                        <div class="article__form__container">
+                            <textarea name="content" class="article__form__container__textarea" cols="30" rows="10" placeholder="Contenu de l'article" [(ngModel)]="article.content"></textarea>
+                        </div>
+                        <div class="article__form__container--button">
+                            <app-button-flat [button]="create"></app-button-flat>
+                        </div>
+                    </form>
+                </article>
+            </section>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,9 +1,24 @@
-<app-header></app-header>
-<main>
-    <div class="sectionScheme">
-        <app-button (click)="goToCreateArticles()" [button]="createArticleButton"></app-button>
-        <section class="articleSchemeContainer">
-            <app-article-scheme *ngFor="let article of articles" (click)="goToArticle(article.id)" class="articleSceme" [article]="article"></app-article-scheme>
-        </section>
-    </div>
-</main>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" class="sidenav" position="end">
+        <mat-nav-list>
+            <mat-list-item (click)="goToArticles()" [ngClass]="{'articles-class': isArticlesRoute()}">Articles</mat-list-item>
+            <mat-list-item (click)="goToThemes()" [ngClass]="{'themes-class': isThemesRoute()}">Thèmes</mat-list-item>
+            <mat-list-item (click)="goToProfil()" class="profilRedirection">
+                <span class="nav__navWrap__select iconWrap iconContainer">
+                    <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
+                  </span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+        <main>
+            <div class="sectionScheme">
+                <app-button-flat (click)="goToCreateArticles()" [button]="createArticleButton"></app-button-flat>
+                <section class="articleSchemeContainer">
+                    <app-article-scheme *ngFor="let article of articles" (click)="goToArticle(article.id)" class="articleSceme" [article]="article"></app-article-scheme>
+                </section>
+            </div>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

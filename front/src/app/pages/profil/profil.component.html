@@ -1,29 +1,44 @@
-<app-header></app-header>
-<main class="main">
-    <section class="section">
-        <h2 class="section__heading">Profil utilisateur</h2>
-        <article class="article">
-            <div class="modal" *ngIf="requestSent">
-                <span>{{ formReturn }}</span>
-            </div>
-            <form (ngSubmit)="updateUser()" class="article__form">
-                <div class="article__form__inputContainer">
-                    <input type="text" name="username" placeholder="Username" class="inputForm" [(ngModel)]="updateUserData.newUsername" required/>
-                </div>
-                <div class="article__form__inputContainer">
-                    <input type="email" name="email" placeholder="email@email.fr" class="inputForm" [(ngModel)]="updateUserData.newEmail" required/>
-                </div>
-                <div class="article__form__container--button">
-                    <app-button [button]="save"></app-button>
-                </div>
-            </form>
-            <div class="logoutContainer">
-                <span class="logoutContainer__text" (click)="logOut()">Se déconnecter</span>
-            </div>
-        </article>
-    </section>
-    <section class="articleSchemeContainer">
-        <h1 class="articleSchemeContainer__heading">Abonnements</h1>
-        <app-theme-scheme *ngFor="let theme of themes" class="articleSceme" [forTheme]="theme" [subedTheme]="subedThemes"></app-theme-scheme>
-    </section>
-</main>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over" class="sidenav" position="end">
+        <mat-nav-list>
+            <mat-list-item (click)="goToArticles()">Articles</mat-list-item>
+            <mat-list-item (click)="goToThemes()">Thèmes</mat-list-item>
+            <mat-list-item (click)="goToProfil()" class="profilRedirection">
+                <span class="nav__navWrap__select iconWrap iconContainer">
+                    <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
+                </span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
+        <main class="main">
+            <section class="section">
+                <h2 class="section__heading">Profil utilisateur</h2>
+                <article class="article">
+                    <div class="modal" *ngIf="requestSent">
+                        <span>{{ formReturn }}</span>
+                    </div>
+                    <form (ngSubmit)="updateUser()" class="article__form">
+                        <div class="article__form__inputContainer">
+                            <input type="text" name="username" placeholder="Username" class="inputForm" [(ngModel)]="updateUserData.newUsername" required/>
+                        </div>
+                        <div class="article__form__inputContainer">
+                            <input type="email" name="email" placeholder="email@email.fr" class="inputForm" [(ngModel)]="updateUserData.newEmail" required/>
+                        </div>
+                        <div class="article__form__container--button">
+                            <app-button-flat [button]="save"></app-button-flat>
+                        </div>
+                    </form>
+                    <div class="logoutContainer">
+                        <span class="logoutContainer__text" (click)="logOut()">Se déconnecter</span>
+                    </div>
+                </article>
+            </section>
+            <section class="articleSchemeContainer">
+                <h1 class="articleSchemeContainer__heading">Abonnements</h1>
+                <app-theme-scheme *ngFor="let theme of themes" class="articleSceme" [forTheme]="theme" [subedTheme]="subedThemes"></app-theme-scheme>
+            </section>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -2,6 +2,9 @@
 <main>
     <section>
         <article class="article article--form">
+            <span class="backImg" (click)="goBack()">
+                <img src="../../../assets/png/Arrow.png" alt="Back arrow">
+            </span>
             <h2 class="article__h2">Inscription</h2>
             <div class="modal" *ngIf="formFailure">
                 <span>Un problème c'est produit lors de l'Inscription</span>

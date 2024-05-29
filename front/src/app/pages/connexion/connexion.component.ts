@@ -29,6 +29,10 @@ export class ConnexionComponent implements OnInit {
     return item ? JSON.parse(item) : null;
   }
 
+  goBack() {
+    history.back();
+  }
+
   loginUser(): void {
     this.authService.loginUser(this.loginData).subscribe(
       (response) => {

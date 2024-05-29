@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from 'src/app/core/services/articles.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
@@ -36,6 +36,7 @@ export class ArticleComponent implements OnInit {
   };
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private articleService: ArticlesService,
     private messageService: MessageService
@@ -44,6 +45,22 @@ export class ArticleComponent implements OnInit {
   ngOnInit(): void {
     this.getThemeById();
     this.getAllMessage();
+  }
+
+  goBack() {
+    history.back();
+  }
+
+  goToProfil() {
+    this.router.navigate(['/profil']);
+  }
+
+  goToThemes() {
+    this.router.navigate(['/themes']);
+  }
+
+  goToArticles() {
+    this.router.navigate(['/articles']);
   }
 
   getThemeById(): void {

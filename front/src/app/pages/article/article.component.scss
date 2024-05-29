@@ -1,5 +1,9 @@
+.main{
+    position: relative;
+}
+
 .section{
-    width: 90%;
+    width: 85%;
     margin: auto;
     &--comments{
         border-top: 1px solid #000;
@@ -21,14 +25,23 @@
 }
 
 .form{
-    text-align: center;
-    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     &__input{
-        width: 95%;
-        padding: 30px 0;
+        flex-basis: 85%;
+        padding: 10px 0 60px 10px;
+        border: 1px solid;
+        border-radius: 16px;
     }
     &__send{
-
+        background: none;
+        border: none;
+        cursor: pointer;
+        &__img{
+            width: 43px;
+            height: 43px;
+        }
     }
 }
 
@@ -41,9 +54,75 @@
         text-align: center;
     }
     &__message{
-        flex-basis: 80%;
+        flex-basis: 75%;
         background: #EEEEEE;
         padding: 15px 15px 35px 15px;
         border-radius: 16px;
+    }
+}
+
+.backImg{
+    &--article{
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+}
+.sidenav{
+    width: 50%;
+}
+
+@media screen and (max-width: 425px) {
+    .sidenav-container{
+        position: initial;
+    }
+    .section{
+        width: 95%;
+    }
+
+    .form{
+        position: relative;
+        &__input{
+            flex-basis: 100%;
+        }
+        &__send{
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+        }
+    }
+
+    .backImg{
+        &--article{
+            position: initial;
+            margin-right: 15px;
+        }
+    }
+
+    .headeContainer{
+        display: flex;
+    }
+
+    .mat-mdc-list-base{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .profilRedirection{
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        background: #D9D9D9;
+        border-radius: 50px;
+    }
+    .iconContainer{
+        display: flex;
+        justify-content: center;
     }
 }
