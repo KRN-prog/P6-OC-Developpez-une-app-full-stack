@@ -12,7 +12,7 @@ export class ConnexionComponent implements OnInit {
   formFailure: boolean = false;
 
   loginData = {
-    email: '',
+    emailOrUsername: '',
     password: '',
   };
 

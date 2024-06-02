@@ -39,6 +39,7 @@ export class InscriptionComponent implements OnInit {
   registerUser(): void {
     this.authService.registerUser(this.registerData).subscribe(
       (response) => {
+        console.log(response);
         switch (response.response) {
           case 'User register successfully':
             this.router.navigate(['/connexion']);
@@ -50,6 +51,8 @@ export class InscriptionComponent implements OnInit {
         }
       },
       (error) => {
+        console.log(error);
+
         this.formFailure = true;
       }
     );
