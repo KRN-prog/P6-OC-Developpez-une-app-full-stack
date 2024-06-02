@@ -30,18 +30,12 @@ public class UserAuthUseCase {
         return getUser;
     }
 
-    public Map<String, String> registerUser(UserDto userDto) {
+    public boolean registerUser(UserDto userDto) {
         UserEntity registerUser = authService.registerUser(userDto);
-        Map<String, String> response = new HashMap<>();
         if (registerUser == null) {
-            response.put("error", "Register error: Invalid credentials");
-            System.out.println(response);
-
-            return response;
+            return false;
         }
-        response.put("response", "User register successfully");
-        System.out.println(response);
-        return response;
+        return true;
     }
 
 }

@@ -25,9 +25,9 @@ public class JWTService {
     public String genrerateToken(UserDto userDto, AuthRequestDto authRequestDto, Authentication authentication) {
         String emailRequest;
         if (userDto != null) {
-            emailRequest = userDto.getMail();
+            emailRequest = userDto.getEmail();
         } else {
-            emailRequest = authRequestDto.getEmail();
+            emailRequest = authRequestDto.getEmailOrUsername();
         }
         Instant now = Instant.now();
         JwtClaimsSet claims = JwtClaimsSet.builder()

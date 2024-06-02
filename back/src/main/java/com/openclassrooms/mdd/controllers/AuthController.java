@@ -45,12 +45,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> postMethodName(@Valid @RequestBody UserDto userDto) {
-        Map<String, String> user = userAuthUseCase.registerUser(userDto);
-        if (user.get("error") != null) {
-            return ResponseEntity.badRequest().body(user.get("error"));
+    public ResponseEntity<Map<String, String>> postMethodName(@Valid @RequestBody UserDto userDto) {
+        boolean user = userAuthUseCase.registerUser(userDto);
+        Map<String, String> response = new HashMap<>();
+        if (user == false) {
+            response.put("error", "Register error: Invalid credentials");
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.ok(user.get("response"));
+        response.put("response", "User register successfully");
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(value = "/me")

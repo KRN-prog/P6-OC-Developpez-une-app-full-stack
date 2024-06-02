@@ -36,12 +36,30 @@ public class AuthService {
     public TokenResponse getUser(AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
 
-        UserEntity user = authRepository.findByUsernameOrEmail(authRequestDto.getEmail(), authRequestDto.getUsername())
+        UserEntity user = authRepository
+                .findByUsernameAndPassword(authRequestDto.getEmailOrUsername(), authRequestDto.getPassword())
                 .orElse(null);
 
         if (user == null) {
-            return null;
+            user = authRepository
+                    .findByEmailAndPassword(authRequestDto.getEmailOrUsername(), authRequestDto.getPassword())
+                    .orElse(null);
+
+            if (user == null) {
+                return null;
+            }
+
+            System.out.println(user);
+            UserDto userDto = UserMapper.maptoUserDto(user);
+
+            String token = jwtService.genrerateToken(userDto, null, authentication);
+
+            TokenResponse tokenResponse = new TokenResponse();
+            tokenResponse.setToken(token);
+
+            return tokenResponse;
         }
+        System.out.println(user);
         UserDto userDto = UserMapper.maptoUserDto(user);
 
         String token = jwtService.genrerateToken(userDto, null, authentication);
@@ -55,13 +73,26 @@ public class AuthService {
 
     public UserEntity registerUser(UserDto userDto) {
 
-        UserEntity user = authRepository.findByUsernameOrEmail(userDto.getMail(), userDto.getUsername())
-                .orElse(null);
+        System.out.println(userDto.getEmail());
+        System.out.println(userDto.getUsername());
+        if (userDto.getEmail().contains("@")) {
+            Integer formPassingCount = 0;
+            UserEntity user = authRepository.findByUsernameAndPassword(userDto.getUsername(), userDto.getPassword())
+                    .orElse(null);
 
-        if (user == null) {
-            UserEntity userEntity = UserMapper.maptoUser(userDto);
-            return authRepository.save(userEntity);
+            if (user == null && formPassingCount == 0) {
+                formPassingCount++;
+                user = authRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword())
+                        .orElse(null);
+                if (user == null && formPassingCount == 1) {
+                    UserEntity userEntity = UserMapper.maptoUser(userDto);
+                    return authRepository.save(userEntity);
+                }
+                return null;
+            }
+            return null;
         }
+
         return null;
 
     }
