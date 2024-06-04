@@ -37,7 +37,7 @@
             </section>
             <section class="articleSchemeContainer">
                 <h1 class="articleSchemeContainer__heading">Abonnements</h1>
-                <app-theme-scheme *ngFor="let theme of themes" class="articleSceme" [forTheme]="theme" [subedTheme]="subedThemes"></app-theme-scheme>
+                <app-theme-scheme *ngFor="let subedTheme of subedThemes" class="articleSceme" [forTheme]="subedTheme.theme" [subedTheme]="subedThemes"></app-theme-scheme>
             </section>
         </main>
     </mat-sidenav-content>
