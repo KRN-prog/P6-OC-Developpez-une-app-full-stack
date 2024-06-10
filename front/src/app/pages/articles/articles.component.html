@@ -6,7 +6,7 @@
             <mat-list-item (click)="goToProfil()" class="profilRedirection">
                 <span class="nav__navWrap__select iconWrap iconContainer">
                     <img src="../../../assets/png/icon _user.png" alt="Profile" class="iconWrap__icon" />
-                  </span>
+                </span>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
@@ -14,7 +14,10 @@
         <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
         <main>
             <div class="sectionScheme">
-                <app-button-flat (click)="goToCreateArticles()" [button]="createArticleButton"></app-button-flat>
+                <div class="createAndFilterContainer">
+                    <app-button-flat (click)="goToCreateArticles()" class="createAndFilterContainer__btn" [button]="createArticleButton"></app-button-flat>
+                    <span (click)="sortArticles()" class="createAndFilterContainer__orderBy">Trier par <span [ngClass]="{'returnArrow': sortOrders}"><img class="arrow" src="../../../assets/png/ArrowDown.png" alt="Arrow down"></span></span>
+                </div>
                 <section class="articleSchemeContainer">
                     <app-article-scheme *ngFor="let article of articles" (click)="goToArticle(article.id)" class="articleSceme" [article]="article"></app-article-scheme>
                 </section>

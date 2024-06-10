@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class ArticlesComponent implements OnInit {
   createArticleButton: string = 'Créer un article';
   articles: any = null;
+  sortOrders: boolean = false;
 
   headers: HttpHeaders = new HttpHeaders({
     Authorization: `Bearer ${this.getItem('userToken')}`,
@@ -32,11 +33,31 @@ export class ArticlesComponent implements OnInit {
     }
   }
 
+  sortArticles() {
+    if (this.articles != null) {
+      if (this.sortOrders === false) {
+        if (this.articles != null) {
+          this.sortOrders = true;
+          this.articles.sort((a: { id: number }, b: { id: number }) => {
+            return b.id - a.id;
+          });
+        }
+      } else {
+        if (this.articles != null) {
+          this.sortOrders = false;
+          this.articles.sort((a: { id: number }, b: { id: number }) => {
+            return a.id - b.id;
+          });
+        }
+      }
+    }
+  }
+
   goToCreateArticles(): void {
     this.router.navigate(['/create/article']);
   }
 
-  goToArticle(idArticle: any): void {
+  goToArticle(idArticle: number): void {
     this.router.navigate(['/article/' + idArticle]);
   }
 
@@ -94,5 +115,5 @@ export class ArticlesComponent implements OnInit {
     return this.router.url.includes('/themes');
   }
 
-  public mesDonnees: any = this.getItem('userToken'); //JSON.parse(localStorage.getItem('mesDonnees'));
+  public mesDonnees: any = this.getItem('userToken');
 }

@@ -16,9 +16,27 @@
     width: 50%;
 }
 
+
+.arrow {
+    transition: transform 0.3s;
+}
+
+.returnArrow .arrow {
+    transform: rotate(180deg);
+}
+
+.createAndFilterContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &__orderBy{
+        cursor: pointer;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .sidenav-container{
-        position: initial;
+        position: sticky;
     }
     .articleSceme{
         flex-basis: 100%;
@@ -28,6 +46,7 @@
         top: 0;
         right: 0;
         bottom: 0;
+        padding-top: 50px;
     }
     .profilRedirection{
         position: absolute;
@@ -43,5 +62,18 @@
     .iconContainer{
         display: flex;
         justify-content: center;
+    }
+
+    .createAndFilterContainer{
+        justify-content: initial;
+        &__btn{
+            flex-basis: 100%;
+            text-align: center;
+        }
+        &__orderBy{
+            flex-basis: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
     }
 }
