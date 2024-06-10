@@ -22,6 +22,14 @@ public class JWTService {
         this.jwtEncoder = jwtEncoder;
     }
 
+    /**
+     * Permet de générer un token
+     * 
+     * @param userDto
+     * @param authRequestDto
+     * @param authentication
+     * @return un token jwt pour identifier l'utilisateur
+     */
     public String genrerateToken(UserDto userDto, AuthRequestDto authRequestDto, Authentication authentication) {
         String emailRequest;
         if (userDto != null) {

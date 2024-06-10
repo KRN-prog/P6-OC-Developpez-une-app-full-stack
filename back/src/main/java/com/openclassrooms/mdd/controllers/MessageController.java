@@ -26,6 +26,12 @@ public class MessageController {
         this.messageUseCase = messageUseCase;
     }
 
+    /**
+     * Permet de poster un message
+     * 
+     * @param messageRequestDto
+     * @return un message enregistrer en base de données
+     */
     @PostMapping("/post/message")
     public ResponseEntity<?> postNewMessage(@Valid @RequestBody MessageRequestDto messageRequestDto) {
         MessageDto messageDto = this.messageUseCase.postNewMessage(messageRequestDto);
@@ -38,6 +44,12 @@ public class MessageController {
         return ResponseEntity.ok(messageDto);
     }
 
+    /**
+     * Retrouver un message via son id poster en base de données
+     * 
+     * @param idArticle
+     * @return un message qui à été posté en base de données via son id
+     */
     @GetMapping("/get/message/{id}")
     public ResponseEntity<?> getMessageFromArticle(@Valid @PathVariable("id") Integer idArticle) {
         List<MessageDto> messageDtos = this.messageUseCase.getMessageFromArticle(idArticle);

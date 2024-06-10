@@ -22,6 +22,14 @@ public class UserService {
 
     private final AuthRepository authRepository;
 
+    /**
+     * Restrouver un utilisateur par l'id
+     * 
+     * @param userId
+     * @return un utilisateur retrouver par l'id
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
     public ResponseEntity<?> getUserById(int userId) throws JsonMappingException, JsonProcessingException {
 
         UserEntity user = authRepository.findByUserId(userId)
@@ -37,6 +45,13 @@ public class UserService {
 
     }
 
+    /**
+     * Modifier l'utilisateur
+     * 
+     * @param userId
+     * @param updateUserRequestDto
+     * @return un utilisateur modifier en bdd
+     */
     public UserEntity updateUser(Long userId, UpdateUserRequestDto updateUserRequestDto) {
 
         Optional<UserEntity> optionalUser = authRepository.findById(userId);

@@ -17,10 +17,25 @@ public class UserUseCase {
 
     private final UserService userService;
 
+    /**
+     * Retrouver l'utilisateur par l'id
+     * 
+     * @param userId
+     * @return un utilisateur
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
     public ResponseEntity<?> getUserById(int userId) throws JsonMappingException, JsonProcessingException {
         return userService.getUserById(userId);
     }
 
+    /**
+     * Modifier l'utilisateur
+     * 
+     * @param userId
+     * @param updateUserRequestDto
+     * @return un utilisateur modifié
+     */
     public UserEntity updateUser(Long userId, UpdateUserRequestDto updateUserRequestDto) {
         return userService.updateUser(userId, updateUserRequestDto);
     }

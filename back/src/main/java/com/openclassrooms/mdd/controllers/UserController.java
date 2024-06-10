@@ -28,12 +28,27 @@ public class UserController {
         this.userUseCase = userUseCase;
     }
 
+    /**
+     * Retrouver un utilisateur par son id
+     * 
+     * @param userId
+     * @return un utilisateur qui à été retrouvé par l'id
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@Valid @PathVariable("id") int userId)
             throws JsonMappingException, JsonProcessingException {
         return userUseCase.getUserById(userId);
     }
 
+    /**
+     * Modifier l'utilisateur
+     * 
+     * @param userId
+     * @param updateUserRequestDto
+     * @return un utilisateur qui à été modifié
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@Valid @PathVariable("id") Long userId,
             @RequestBody UpdateUserRequestDto updateUserRequestDto) {

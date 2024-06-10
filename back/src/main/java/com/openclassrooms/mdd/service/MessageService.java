@@ -21,6 +21,12 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
 
+    /**
+     * Pemret de poster un nouveau message
+     * 
+     * @param messageRequestDto
+     * @return un message poster en base de données
+     */
     @Transactional
     public MessageDto postNewMessage(MessageRequestDto messageRequestDto) {
         MessageEntity message = MessageRequestMapper.maptoMessageEntity(messageRequestDto);
@@ -29,6 +35,12 @@ public class MessageService {
         return MessageMapper.maptoMessageDto(message);
     }
 
+    /**
+     * Permet de retrouver tout les messages posté sur un article
+     * 
+     * @param idArticle
+     * @return une liste de message poster sur un article
+     */
     public List<MessageDto> getMessageFromArticle(int idArticle) {
 
         List<MessageEntity> message = messageRepository.findByArticle_ArticleId(idArticle);

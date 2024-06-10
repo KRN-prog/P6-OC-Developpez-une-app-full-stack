@@ -17,6 +17,11 @@ public class ArticleUseCase {
 
     private final ArticleService articleService;
 
+    /**
+     * Retrouver tout les articles
+     * 
+     * @return un liste de tout les articles existant
+     */
     public List<ArticleDto> getAllArticles() {
         List<ArticleDto> articleDtos = articleService.getAllArticles();
         if (articleDtos == null) {
@@ -25,6 +30,12 @@ public class ArticleUseCase {
         return articleDtos;
     }
 
+    /**
+     * Retrouver l'utilisateur par l'id
+     * 
+     * @param articleId
+     * @return un utilisateur retrouver par l'id
+     */
     public ArticleDto getArticleById(Integer articleId) {
         ArticleDto articleDto = articleService.getArticleById(articleId);
         if (articleDto == null) {
@@ -33,10 +44,23 @@ public class ArticleUseCase {
         return articleDto;
     }
 
+    /**
+     * Modifier l'utilisateur par l'id
+     * 
+     * @param articleRequestDto
+     * @param articleId
+     * @return un utilisateur modifié
+     */
     public ResponseEntity<?> updateArticleById(ArticleRequestDto articleRequestDto, int articleId) {
         return articleService.updateArticleById(articleRequestDto, articleId);
     }
 
+    /**
+     * Poster un nouvel article
+     * 
+     * @param articleRequestDto
+     * @return un nouvelle article
+     */
     public ArticleDto postNewArticle(ArticleRequestDto articleRequestDto) {
         return articleService.postNewArticle(articleRequestDto);
     }

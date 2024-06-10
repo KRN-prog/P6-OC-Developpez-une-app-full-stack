@@ -31,6 +31,11 @@ public class ThemesController {
         this.themesUseCase = themesUseCase;
     }
 
+    /**
+     * Retrouver les themes
+     * 
+     * @return un tableau contenant une liste de themes
+     */
     @GetMapping("/themes")
     public ResponseEntity<?> getAllThemes() {
         List<ThemeDto> themeDtos = this.themesUseCase.getAllThemes();
@@ -44,6 +49,12 @@ public class ThemesController {
         return ResponseEntity.ok(themeDtos);
     }
 
+    /**
+     * Retrouver un id par son id
+     * 
+     * @param id
+     * @return un objet contenant un theme
+     */
     @GetMapping("/theme/{id}")
     public ResponseEntity<?> getThemeById(@Valid @PathVariable Long id) {
         ThemeDto themeDto = this.themesUseCase.getThemesById(id);
@@ -57,11 +68,23 @@ public class ThemesController {
         return ResponseEntity.ok(themeDto);
     }
 
+    /**
+     * Permet de s'abonner à un theme
+     * 
+     * @param themeSubRequestDto
+     * @return un abonnement à un theme qui est enregistrer en bdd
+     */
     @PostMapping("/theme/sub")
     public ThemeSubEntity postNewSub(@Valid @RequestBody ThemeSubRequestDto themeSubRequestDto) {
         return themesUseCase.postNewSub(themeSubRequestDto);
     }
 
+    /**
+     * Retrouver l'abonnement à un theme par l'id
+     * 
+     * @param userId
+     * @return un/plusieurs themes auquelles je me suis sub
+     */
     @GetMapping("/theme/sub/{id}")
     public ResponseEntity<?> getThemesByUser(@PathVariable("id") Integer userId) {
 
@@ -72,6 +95,12 @@ public class ThemesController {
         return ResponseEntity.ok(themeDtos);
     }
 
+    /**
+     * Permet de se désabonner d'un theme
+     * 
+     * @param deleteThemeSubDto
+     * @return Une string pour signifier que l'abonnment est annulé
+     */
     @DeleteMapping("/theme/sub")
     public ResponseEntity<?> deleteThemesByUser(@RequestBody DeleteThemeSubDto deleteThemeSubDto) {
 

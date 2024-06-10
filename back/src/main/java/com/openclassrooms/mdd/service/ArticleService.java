@@ -25,6 +25,11 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
+    /**
+     * De retrouver tout les articles disponible
+     * 
+     * @return une liste d'articles disponible
+     */
     public List<ArticleDto> getAllArticles() {
 
         List<ArticleEntity> articles = articleRepository.findAll();
@@ -39,6 +44,12 @@ public class ArticleService {
 
     }
 
+    /**
+     * Retrouver un article par son id
+     * 
+     * @param articleId
+     * @return un article retrouvé par son id
+     */
     public ArticleDto getArticleById(int articleId) {
 
         ArticleEntity article = articleRepository.findByArticleId(articleId)
@@ -51,6 +62,13 @@ public class ArticleService {
 
     }
 
+    /**
+     * Modifier un article par son id
+     * 
+     * @param articleRequestDto
+     * @param articleId
+     * @return un article via son id
+     */
     public ResponseEntity<?> updateArticleById(ArticleRequestDto articleRequestDto, int articleId) {
 
         ArticleEntity article = articleRepository.findByArticleId(articleId)
@@ -66,6 +84,12 @@ public class ArticleService {
 
     }
 
+    /**
+     * Permet de poster un nouvelle article
+     * 
+     * @param articleRequestDto
+     * @return un article qui à été enregistrer en base de données
+     */
     @Transactional
     public ArticleDto postNewArticle(ArticleRequestDto articleRequestDto) {
         ArticleEntity article = ArticleRequestMapper.maptoArticle(articleRequestDto);

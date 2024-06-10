@@ -26,6 +26,11 @@ public class ThemesService {
     private final ThemesRepository themesRepository;
     private final ThemeSubRepository themeSubRepository;
 
+    /**
+     * Permet de retrouver tout les themes
+     * 
+     * @return une liste de tout les themes existant
+     */
     public List<ThemeDto> getAllThemes() {
 
         List<ThemesEntity> theme = themesRepository.findAll();
@@ -40,6 +45,12 @@ public class ThemesService {
         return themesDtos;
     }
 
+    /**
+     * Permet de retrouver un theme par id
+     * 
+     * @param articleId
+     * @return un theme par id
+     */
     public ThemeDto getThemeById(Long articleId) {
 
         ThemesEntity theme = themesRepository.findById(articleId)
@@ -51,6 +62,12 @@ public class ThemesService {
         return ThemeMapper.maptoThemesDto(theme);
     }
 
+    /**
+     * Poster un nouveau theme
+     * 
+     * @param themeSubDto
+     * @return un theme enregistrer en bdd
+     */
     public ThemeSubEntity postNewSub(ThemeSubRequestDto themeSubDto) {
         ThemeSubEntity theme_sub = ThemeSubMapper.maptoThemesSub(themeSubDto);
         System.out.println(themeSubDto.getUser());
@@ -58,6 +75,12 @@ public class ThemesService {
         return themesRepository.save(theme_sub);
     }
 
+    /**
+     * Retrouver tout les themes auquelles l'utilisateur c'est abonné
+     * 
+     * @param userId
+     * @return une liste de theme retrouver via l'id de l'utilisateur
+     */
     public List<ThemeSubDto> getThemesSub(Integer userId) {
         List<ThemeSubEntity> themes = themeSubRepository.findByUser_UserId(userId);
 
@@ -70,6 +93,12 @@ public class ThemesService {
         return themesConverter;
     }
 
+    /**
+     * Supprimer l'abonnement à un theme
+     * 
+     * @param deleteThemeSubDto
+     * @return un boolean pour savoir si l'utilisateur est bien désabonné
+     */
     public boolean deleteThemesSub(DeleteThemeSubDto deleteThemeSubDto) {
         ThemeSubEntity theme = themeSubRepository.findByUser_UserIdAndTheme_Id(deleteThemeSubDto.getUserId(),
                 deleteThemeSubDto.getThemeId());
@@ -78,11 +107,6 @@ public class ThemesService {
             return false;
         }
         themeSubRepository.delete(theme);
-        /*
-         * List<ThemeSubDto> themesConverter = themes.stream()
-         * .map(ThemeSubMapper::mapToThemesSubDto)
-         * .collect(Collectors.toList());
-         */
         return true;
     }
 

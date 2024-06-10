@@ -28,11 +28,25 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
+    /**
+     * Permet de retrouver un utilisateur par son email
+     * 
+     * @param userEmail
+     * @return un utilisateur rerouvé par son email
+     */
     public UserDto findByMail(String userEmail) {
         UserEntity userEntity = authRepository.findByEmail(userEmail).get();
         return UserMapper.maptoUserDto(userEntity);
     }
 
+    /**
+     * Permet de retrouver un utilisateur
+     * 
+     * @param authRequestDto
+     * @param authentication
+     * @return un token pour pouvoir identifier l'utilisateur
+     * @throws JsonProcessingException
+     */
     public TokenResponse getUser(AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
 
@@ -71,18 +85,23 @@ public class AuthService {
 
     }
 
+    /**
+     * Permet d'enregistrer un utilisateur
+     * 
+     * @param userDto
+     * @return un utilisater enregistrer en base de données
+     */
     public UserEntity registerUser(UserDto userDto) {
 
         System.out.println(userDto.getEmail());
         System.out.println(userDto.getUsername());
         if (userDto.getEmail().contains("@")) {
             Integer formPassingCount = 0;
-            UserEntity user = authRepository.findByUsernameAndPassword(userDto.getUsername(), userDto.getPassword())
+            UserEntity user = authRepository.findByUsername(userDto.getUsername())
                     .orElse(null);
-
             if (user == null && formPassingCount == 0) {
                 formPassingCount++;
-                user = authRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword())
+                user = authRepository.findByEmail(userDto.getEmail())
                         .orElse(null);
                 if (user == null && formPassingCount == 1) {
                     UserEntity userEntity = UserMapper.maptoUser(userDto);

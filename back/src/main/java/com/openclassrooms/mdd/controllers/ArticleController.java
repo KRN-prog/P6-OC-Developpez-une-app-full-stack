@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+/**
+ * Class permettant d'intéragir avec les articles de l'application
+ */
 @RestController
 @RequestMapping("/mdd")
 public class ArticleController {
@@ -29,6 +32,11 @@ public class ArticleController {
         this.articleUseCase = articleUseCase;
     }
 
+    /**
+     * Controller pour pouvoir récupérer l'entièreté des articles
+     * 
+     * @return Une liste d'articles
+     */
     @GetMapping("/articles")
     public ResponseEntity<?> getAllArticle() {
         List<ArticleDto> articleDtos = this.articleUseCase.getAllArticles();
@@ -40,6 +48,12 @@ public class ArticleController {
         return ResponseEntity.ok(articleDtos);
     }
 
+    /**
+     * Controller pour récupérer l'article via un ID
+     * 
+     * @param id
+     * @return 1 article choisie par l'id
+     */
     @GetMapping("/article/{id}")
     public ResponseEntity<?> getArticleById(@Valid @PathVariable("id") Integer id) {
         ArticleDto articleDto = this.articleUseCase.getArticleById(id);
@@ -53,12 +67,25 @@ public class ArticleController {
         return ResponseEntity.ok(articleDto);
     }
 
+    /**
+     * Modifier un article par son id
+     * 
+     * @param articleRequestDto
+     * @param articleId
+     * @return 1 article modifier par son id et les modification apportés
+     */
     @PutMapping("/article/{id}")
     public ResponseEntity<?> updateArticle(@Valid @RequestBody ArticleRequestDto articleRequestDto,
             @PathVariable("id") int articleId) {
         return this.articleUseCase.updateArticleById(articleRequestDto, articleId);
     }
 
+    /**
+     * Ajouter un article
+     * 
+     * @param articleRequestDto
+     * @return 1 article ajouter avec l'articleRequestDto
+     */
     @PostMapping("/article")
     public ResponseEntity<?> postNewArticle(@Valid @RequestBody ArticleRequestDto articleRequestDto) {
         ArticleDto articleDto = this.articleUseCase.postNewArticle(articleRequestDto);

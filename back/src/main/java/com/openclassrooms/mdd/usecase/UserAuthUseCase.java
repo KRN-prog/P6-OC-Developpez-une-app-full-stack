@@ -21,6 +21,14 @@ public class UserAuthUseCase {
 
     private final AuthService authService;
 
+    /**
+     * Retrouver un utilisateur via l'authentication et l'email ou le username
+     * 
+     * @param authRequestDto
+     * @param authentication
+     * @return un utilisateur
+     * @throws JsonProcessingException
+     */
     public TokenResponse getUser(AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
         TokenResponse getUser = authService.getUser(authRequestDto, authentication);
@@ -30,6 +38,12 @@ public class UserAuthUseCase {
         return getUser;
     }
 
+    /**
+     * Enregistrer un utilisateur
+     * 
+     * @param userDto
+     * @return un utilisateur enregistrer
+     */
     public boolean registerUser(UserDto userDto) {
         UserEntity registerUser = authService.registerUser(userDto);
         if (registerUser == null) {

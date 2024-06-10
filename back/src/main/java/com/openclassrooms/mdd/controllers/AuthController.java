@@ -31,6 +31,14 @@ public class AuthController {
         this.userAuthUseCase = userAuthUseCase;
     }
 
+    /**
+     * Permet de se connecter avec le username ou l'email et le mot de passe
+     * 
+     * @param authRequestDto
+     * @param authentication
+     * @return Retourn un token JWT
+     * @throws JsonProcessingException
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody AuthRequestDto authRequestDto, Authentication authentication)
             throws JsonProcessingException {
@@ -44,6 +52,12 @@ public class AuthController {
         return ResponseEntity.ok(objectMapper.writeValueAsString(tokenResponse));
     }
 
+    /**
+     * Permet de s'inscrire avec un email, username et mot de passe
+     * 
+     * @param userDto
+     * @return un utilisateur enregistrer un base de données
+     */
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> postMethodName(@Valid @RequestBody UserDto userDto) {
         boolean user = userAuthUseCase.registerUser(userDto);
@@ -56,6 +70,11 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Permet de s'authentifier
+     * 
+     * @return un utilisateur authentifié
+     */
     @GetMapping(value = "/me")
     public UserDto createUserMe() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
