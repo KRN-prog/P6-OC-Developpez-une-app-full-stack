@@ -21,8 +21,6 @@ public interface AuthRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByEmailAndPassword(String emailOrUsername, String password);
 
-    // Optional<UserEntity> findByUsernameOrEmail(String username, String email);
-
     void save(UserDto userDto);
 
 }
