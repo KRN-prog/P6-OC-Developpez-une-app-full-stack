@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,8 @@ public class AuthService {
     private AuthRepository authRepository;
 
     public JWTService jwtService;
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     public AuthService(AuthRepository authRepository, JWTService jwtService) {
@@ -51,19 +54,32 @@ public class AuthService {
             throws JsonProcessingException {
 
         UserEntity user = authRepository
-                .findByUsernameAndPassword(authRequestDto.getEmailOrUsername(), authRequestDto.getPassword())
+                .findByUsername(authRequestDto.getEmailOrUsername())
                 .orElse(null);
 
         if (user == null) {
             user = authRepository
-                    .findByEmailAndPassword(authRequestDto.getEmailOrUsername(), authRequestDto.getPassword())
+                    .findByEmail(authRequestDto.getEmailOrUsername())
                     .orElse(null);
 
             if (user == null) {
                 return null;
             }
 
-            System.out.println(user);
+            if (passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword())) {
+                UserDto userDto = UserMapper.maptoUserDto(user);
+
+                String token = jwtService.genrerateToken(userDto, null, authentication);
+
+                TokenResponse tokenResponse = new TokenResponse();
+                tokenResponse.setToken(token);
+
+                return tokenResponse;
+            } else {
+                return null;
+            }
+        }
+        if (passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword())) {
             UserDto userDto = UserMapper.maptoUserDto(user);
 
             String token = jwtService.genrerateToken(userDto, null, authentication);
@@ -72,16 +88,9 @@ public class AuthService {
             tokenResponse.setToken(token);
 
             return tokenResponse;
+        } else {
+            return null;
         }
-        System.out.println(user);
-        UserDto userDto = UserMapper.maptoUserDto(user);
-
-        String token = jwtService.genrerateToken(userDto, null, authentication);
-
-        TokenResponse tokenResponse = new TokenResponse();
-        tokenResponse.setToken(token);
-
-        return tokenResponse;
 
     }
 
@@ -93,10 +102,9 @@ public class AuthService {
      */
     public UserEntity registerUser(UserDto userDto) {
 
-        System.out.println(userDto.getEmail());
-        System.out.println(userDto.getUsername());
         if (userDto.getEmail().contains("@")) {
             Integer formPassingCount = 0;
+            userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
             UserEntity user = authRepository.findByUsername(userDto.getUsername())
                     .orElse(null);
             if (user == null && formPassingCount == 0) {
